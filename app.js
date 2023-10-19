@@ -1,17 +1,18 @@
-const express = require('express');
-const logger = require('morgan');
-const cors = require('cors');
+const express = require("express");
+const logger = require("morgan");
+const cors = require("cors");
 
-require('dotenv').config();
+require("dotenv").config();
 
-const authRouter = require('./routes/api/users');
+const authRouter = require("./routes/api/users");
+const trainingRouter = require("./routes/api/training");
 
-const { dirNames } = require('./variables');
+const { dirNames } = require("./variables");
 
 const app = express();
 
 // Determine the logging format based on the environment
-const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
+const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
 // Middleware for request logging
 app.use(logger(formatsLogger));
@@ -25,16 +26,17 @@ app.use(express.json());
 app.use(express.static(dirNames.PUBLIC_DIR));
 
 // Routes for user authentication and contact management
-app.use('/api/users', authRouter);
+app.use("/api/users", authRouter);
+app.use("/api/training", trainingRouter);
 
 // Middleware for handling 404 errors (Not Found)
 app.use((req, res) => {
-  res.status(404).json({ message: 'Not found' });
+  res.status(404).json({ message: "Not found" });
 });
 
 // Middleware for handling errors and sending appropriate responses
 app.use((err, req, res, next) => {
-  const { status = 500, message = 'Server error' } = err;
+  const { status = 500, message = "Server error" } = err;
   res.status(status).json({ message });
 });
 
