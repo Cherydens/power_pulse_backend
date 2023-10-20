@@ -9,8 +9,8 @@ const controllers = require('../../controllers/diary');
 // An Express router object is created:
 const router = express.Router();
 
-router.get('/diary', authenticate, controllers.getDashboard);
-router.get('/diary/day', authenticate, controllers.getDayDashboard);
-router.delete('/diary/day:exercisId', authenticate, controllers.deleteExercis);
+router.get('/', authenticate, controllers.getDashboard);
+router.get('/day', authenticate, controllers.getDayDashboard);
+router.delete('/day:exercisId', authenticate, controllers.deleteExercis);
 
 module.exports = router;
