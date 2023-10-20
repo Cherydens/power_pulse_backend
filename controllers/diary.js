@@ -29,8 +29,17 @@ const deleteExercis = controllerWrapper(async (req, res) => {
   res.status(202).json(result);
 });
 
+// Контролер видалення продукту що містяться в щоденнику користувача за визначену дату
+const deleteProduct = controllerWrapper(async (req, res) => {
+  const { productId } = req.params;
+  const result = await Exercises.findByIdAndRemove(productId);
+  //  Response with the object of exercises
+  res.status(202).json(result);
+});
+
 module.exports = {
   getDashboard,
   getDayDashboard,
   deleteExercis,
+  deleteProduct,
 };

@@ -12,5 +12,6 @@ const router = express.Router();
 router.get('/', authenticate, controllers.getDashboard);
 router.get('/day', authenticate, controllers.getDayDashboard);
 router.delete('/day:exercisId', authenticate, controllers.deleteExercis);
+router.delete('/day:productId', authenticate, controllers.deleteProduct);
 
 module.exports = router;
