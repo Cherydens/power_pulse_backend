@@ -9,6 +9,7 @@ const controllers = require('../../controllers/diary');
 // An Express router object is created:
 const router = express.Router();
 
-router.get('/diary', authenticate, controllers.getDayDashboard);
+router.get('/diary', authenticate, controllers.getDashboard);
+router.get('/diary/day', authenticate, controllers.getDayDashboard);
 
 module.exports = router;

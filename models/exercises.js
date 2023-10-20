@@ -1,6 +1,6 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
-const { handleMongooseError } = require("../utils");
+const { handleMongooseError } = require('../utils');
 
 /**
  * Schema for the User model.
@@ -33,11 +33,11 @@ const exercisesSchema = new Schema(
 );
 
 // Handle Mongoose save errors using a post middleware
-exercisesSchema.post("save", handleMongooseError);
+exercisesSchema.post('save', handleMongooseError);
 
 /**
  * Mongoose model for the 'exercise' collection using the userSchema.
  */
-const Exercises = model("exercise", exercisesSchema);
+const Exercises = model('exercise', exercisesSchema);
 
 module.exports = Exercises;
