@@ -31,7 +31,7 @@ mongoose
       console.log(`Server running. Use our API on port: ${PORT}`);
     });
   })
-  .catch((error) => {
+  .catch(error => {
     console.log(error.message);
     process.exit(1);
   });
@@ -42,7 +42,7 @@ module.exports = {
   connect: () => {
     mongoose.connect(DB_HOST);
   },
-  disconnect: (done) => {
+  disconnect: done => {
     mongoose.disconnect(done);
   },
 };
