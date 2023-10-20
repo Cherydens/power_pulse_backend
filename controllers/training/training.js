@@ -1,5 +1,6 @@
-const Exercises = require("../models/exercises");
-const { controllerWrapper } = require("../utils");
+const Exercises = require('../../models/exercises');
+const ExercisesFilter = require('../../models/exercisesFilter');
+const { controllerWrapper } = require('../../utils');
 
 /**
  * Get all exercises from database.
@@ -28,17 +29,8 @@ const getAllExercises = controllerWrapper(async (req, res) => {
  */
 
 const getExerciseFilter = controllerWrapper(async (req, res) => {
-  // await for target array from db
-  const muscules = await Exercises.distinct("target");
-
-  // await for bodyPart array from db
-  const bodyPart = await Exercises.distinct("bodyPart");
-
-  // await for equipment array from db
-  const equipment = await Exercises.distinct("equipment");
-
-  // create one response object with 3 type of fields
-  const result = { muscules, bodyPart, equipment };
+  // await for filters from db
+  const result = await ExercisesFilter.find();
 
   //  Response with the object  of exercise filters
   res.status(200).json(result);
