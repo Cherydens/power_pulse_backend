@@ -11,20 +11,15 @@ const productSchema = new Schema(
       type: String,
       required: [true, 'title is required'],
     },
-    caloriesValue: {
+    calories: {
       type: String,
       default: null,
     },
-    category: {
-      type: String,
-      required: [true, 'Category is required'],
-      default: '',
-    },
-    quantity: {
+    amount: {
       type: String,
       default: null,
     },
-    dateOfuse: {
+    date: {
       type: String,
       default: '',
     },
