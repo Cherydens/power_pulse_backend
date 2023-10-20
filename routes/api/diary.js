@@ -10,8 +10,11 @@ const controllers = require('../../controllers/diary');
 const router = express.Router();
 
 router.get('/', authenticate, controllers.getDashboard);
+
 router.get('/day', authenticate, controllers.getDayDashboard);
+
 router.delete('/day:exerciseId', authenticate, controllers.deleteExercise);
+
 router.delete('/day:productId', authenticate, controllers.deleteProduct);
 
 module.exports = router;
