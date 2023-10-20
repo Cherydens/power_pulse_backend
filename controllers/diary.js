@@ -1,6 +1,7 @@
 const Products = require('../models/products');
 const Exercises = require('../models/exercises');
 const { controllerWrapper } = require('../utils/wrappers/controllerWrapper');
+const { exerciseSchema, productSchema } = require('../utils');
 
 // Контролер отримання всіх вправ та продуктів що містяться в щоденнику користувача
 const getDashboard = controllerWrapper(async (req, res) => {
@@ -37,9 +38,25 @@ const deleteProduct = controllerWrapper(async (req, res) => {
   res.status(202).json(result);
 });
 
+// Контролер додавання продукту що містяться в щоденнику користувача за визначену дату
+const addProductInDiary = controllerWrapper(async (req, res) => {
+  const product = await Products.create({ ...req.body });
+
+  res.status(201).json(product);
+});
+
+// Контролер додавання вправи що містяться в щоденнику користувача за визначену дату
+const addExerciseInDiary = controllerWrapper(async (req, res) => {
+  const exercise = await Exercises.create({ ...req.body });
+
+  res.status(201).json(exercise);
+});
+
 module.exports = {
   getDashboard,
   getDayDashboard,
   deleteExercise,
   deleteProduct,
+  addProductInDiary,
+  addExerciseInDiary,
 };
