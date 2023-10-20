@@ -4,7 +4,7 @@
  * @param {function} controller - Asynchronous controller function to be wrapped
  * @returns {function} Middleware function that wraps the controller
  */
-const controllerWrapper = (controller) => {
+const controllerWrapper = controller => {
   return async (req, res, next) => {
     try {
       // Call the provided controller function and handle any errors

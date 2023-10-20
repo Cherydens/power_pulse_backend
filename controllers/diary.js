@@ -21,7 +21,16 @@ const getDayDashboard = controllerWrapper(async (req, res) => {
   res.status(200).json(result);
 });
 
+// Контролер видалення вправи що містяться в щоденнику користувача за визначену дату
+const deleteExercis = controllerWrapper(async (req, res) => {
+  const { exercisId } = req.params;
+  const result = await Exercises.findByIdAndRemove(exercisId);
+  //  Response with the object of exercises
+  res.status(202).json(result);
+});
+
 module.exports = {
   getDashboard,
   getDayDashboard,
+  deleteExercis,
 };
