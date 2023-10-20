@@ -1,6 +1,26 @@
 const { Schema, model } = require('mongoose');
 
 const { handleMongooseError } = require('../utils');
+const notAllowedSchema = new Schema(
+  {
+    1: {
+      type: Boolean,
+    },
+    2: {
+      type: Boolean,
+    },
+    2: {
+      type: Boolean,
+    },
+    3: {
+      type: Boolean,
+    },
+    4: {
+      type: Boolean,
+    },
+  },
+  { versionKey: false, _id: false }
+);
 
 /**
  * Schema for the Products model.
@@ -20,7 +40,7 @@ const productsSchema = new Schema(
       type: Number,
     },
     groupBloodNotAllowed: {
-      type: Object,
+      type: notAllowedSchema,
     },
   },
   { versionKey: false }
