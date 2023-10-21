@@ -8,7 +8,12 @@ const getAge = require('../aboutUser/getAge');
  */
 const registerUserSchema = Joi.object({
   name: Joi.string().trim().empty().required(),
-  email: Joi.string().trim().empty().pattern(regexpList.email).required(),
+  email: Joi.string()
+    .trim()
+    .empty()
+    .email()
+    .pattern(regexpList.email)
+    .required(),
   password: Joi.string().min(6).required(),
 }).messages(validateErrorMessageList);
 
@@ -16,7 +21,12 @@ const registerUserSchema = Joi.object({
  * Joi schema for validating the request body when logging in a user.
  */
 const loginUserSchema = Joi.object({
-  email: Joi.string().trim().empty().pattern(regexpList.email).required(),
+  email: Joi.string()
+    .trim()
+    .empty()
+    .email()
+    .pattern(regexpList.email)
+    .required(),
   password: Joi.string().min(6).required(),
 }).messages(validateErrorMessageList);
 

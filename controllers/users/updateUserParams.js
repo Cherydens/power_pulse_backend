@@ -3,10 +3,11 @@ const { getBmr, controllerWrapper } = require('../../utils');
 
 const updateUserParams = controllerWrapper(async (req, res) => {
   const { email } = req.user;
+  const userParams = { ...req.body };
 
   const { name, avatarUrls, createdAt } = await User.findOneAndUpdate(
     { email },
-    req.body,
+    { userParams },
     { new: true }
   );
 
@@ -15,10 +16,10 @@ const updateUserParams = controllerWrapper(async (req, res) => {
       name,
       email,
       avatarUrls,
-      userParams: req.body,
+      userParams,
       createdAt,
     },
-    bmr: getBmr(req.body),
+    bmr: getBmr(userParams),
   });
 });
 
