@@ -7,7 +7,7 @@ const updateUserParams = controllerWrapper(async (req, res) => {
 
   const { name, avatarUrls, createdAt } = await User.findOneAndUpdate(
     { email },
-    { userParams: userParams },
+    { userParams },
     { new: true }
   );
 
@@ -16,10 +16,10 @@ const updateUserParams = controllerWrapper(async (req, res) => {
       name,
       email,
       avatarUrls,
-      userParams: userParams,
+      userParams,
       createdAt,
     },
-    bmr: getBmr(req.body),
+    bmr: getBmr(userParams),
   });
 });
 
