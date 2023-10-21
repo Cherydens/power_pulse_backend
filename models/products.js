@@ -22,9 +22,6 @@ const notAllowedSchema = new Schema(
   { versionKey: false, _id: false }
 );
 
-/**
- * Schema for the Products model.
- */
 const productsSchema = new Schema(
   {
     title: {
@@ -46,12 +43,8 @@ const productsSchema = new Schema(
   { versionKey: false }
 );
 
-// Handle Mongoose save errors using a post middleware
 productsSchema.post('save', handleMongooseError);
 
-/**
- * Mongoose model for the 'products' collection using the userSchema.
- */
 const Products = model('product', productsSchema);
 
 module.exports = Products;

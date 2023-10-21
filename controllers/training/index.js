@@ -1,7 +1,7 @@
 const getAllExercises = require('./getAllExercises');
-const getExerciseFilter = require('./getExerciseFilter');
+const getExerciseCategories = require('./getExerciseCategories');
 
 module.exports = {
   getAllExercises,
-  getExerciseFilter,
+  getExerciseCategories,
 };

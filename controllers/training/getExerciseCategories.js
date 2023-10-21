@@ -1,7 +1,7 @@
-const ExercisesFilter = require('../../models/exercisesFilter');
+const ExercisesFilter = require('../../models/exerciseCategories');
 const { controllerWrapper } = require('../../utils');
 
-const getExerciseFilter = controllerWrapper(async (req, res) => {
+const getExerciseCategories = controllerWrapper(async (req, res) => {
   // await for filters from db
   const result = await ExercisesFilter.find();
 
@@ -9,4 +9,4 @@ const getExerciseFilter = controllerWrapper(async (req, res) => {
   res.status(200).json(result);
 });
 
-module.exports = getExerciseFilter;
+module.exports = getExerciseCategories;
