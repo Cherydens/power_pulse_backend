@@ -2,7 +2,7 @@
 
 const express = require('express');
 const { authenticate } = require('../../middlewares');
-const controllers = require('../../controllers/products/products');
+const controllers = require('../../controllers/products/index');
 
 // An Express router object is created:
 const router = express.Router();
