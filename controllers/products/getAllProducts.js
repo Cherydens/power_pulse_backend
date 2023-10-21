@@ -4,8 +4,8 @@ const { controllerWrapper } = require('../../utils');
 const getAllProducts = controllerWrapper(async (req, res) => {
   const { query = '', page = 1, limit = 18 } = req.query;
   const skip = (page - 1) * limit;
-  const blood = 1;
-  //   const blood = req.user.user.userParams.blood;
+
+  const blood = req.user.user.userParams.blood;
 
   const recommendedProducts = await Products.find(
     {
