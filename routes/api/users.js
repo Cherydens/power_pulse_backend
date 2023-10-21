@@ -1,11 +1,8 @@
-// The necessary modules and libraries are imported:
-
 const express = require('express');
 
 const {
   validateBody,
   authenticate,
-  uploadImage,
 } = require('../../middlewares');
 const controllers = require('../../controllers/users');
 const { userValidationSchemas } = require('../../utils');
@@ -50,19 +47,23 @@ router.post(
   controllers.updateUserParams
 );
 
-// router.patch(
-//   '/',
-//   authenticate,
-//   validateBody(userValidationSchemas.updateUserSchema),
-//   controllers.updateUser
-// );
+// Route for updating the user's params (PUT /params):
+router.put(
+  '/params',
+  authenticate,
+  validateBody(userValidationSchemas.updateUserParamsSchema),
+  controllers.updateUserParams
+);
 
-// // Route for updating the user's avatar (PATCH /):
-// router.patch(
-//   '/avatars',
-//   authenticate,
-//   uploadImage.single('avatar'),
-//   controllers.updateUserAvatar
-// );
+// Route for getting the user's params (GET /params):
+router.get('/params', authenticate, controllers.getUserParams);
+
+// Route for updating the user's name (PATCH /):
+router.patch(
+  '/username',
+  authenticate,
+  validateBody(userValidationSchemas.updateUserNameSchema),
+  controllers.updateUserName
+);
 
 module.exports = router;
