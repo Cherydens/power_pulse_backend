@@ -18,6 +18,6 @@ router.get('/exercises', authenticate, controllers.getAllExercises);
 // Створити приватний ендпоінт, який повертає всі типи існуючих в базі даних (БД) частин тілу, мʼязів та обладнання.
 
 // Route for get exercise filter (get /filter):
-router.get('/filter', authenticate, controllers.getExerciseFilter);
+router.get('/categories', authenticate, controllers.getExerciseCategories);
 
 module.exports = router;
