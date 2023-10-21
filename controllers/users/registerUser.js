@@ -7,7 +7,6 @@ const { controllerWrapper, HttpError } = require('../../utils');
 const { SECRET_KEY } = process.env;
 
 const registerUser = controllerWrapper(async (req, res) => {
-  console.log(req.body);
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (user) {
