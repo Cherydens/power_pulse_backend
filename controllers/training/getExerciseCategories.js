@@ -1,11 +1,19 @@
-const ExercisesFilter = require('../../models/exerciseCategories');
+const ExerciseCategories = require('../../models/exerciseCategories');
 const { controllerWrapper } = require('../../utils');
 
 const getExerciseCategories = controllerWrapper(async (req, res) => {
-  // await for filters from db
-  const result = await ExercisesFilter.find();
+  const bodyPart = await ExerciseCategories.find({
+    filter: 'Body parts',
+  });
+  const muscles = await ExerciseCategories.find({
+    filter: 'Muscles',
+  });
+  const equipment = await ExerciseCategories.find({
+    filter: 'Equipment',
+  });
 
-  //  Response with the object  of exercise filters
+  const result = { bodyPart, muscles, equipment };
+
   res.status(200).json(result);
 });
 
