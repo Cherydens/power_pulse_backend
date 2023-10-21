@@ -1,7 +1,64 @@
 const { Schema, model } = require('mongoose');
 
-const { handleMongooseError } = require('../utils');
+const { handleMongooseError, getAge } = require('../utils');
 const { regexpList } = require('../variables');
+
+/**
+ * Schema for the AvatarUrls model.
+ */
+const avatarUrlsSchema = new Schema(
+  {
+    mobile: {
+      type: String,
+    },
+    desktop: {
+      type: String,
+    },
+  },
+  { versionKey: false, _id: false }
+);
+
+/**
+ * Schema for the UserParams model.
+ */
+const userParamsSchema = new Schema(
+  {
+    height: {
+      type: Number,
+      min: 150,
+    },
+    currentWeight: {
+      type: Number,
+      min: 35,
+    },
+    desiredWeight: {
+      type: Number,
+      min: 35,
+    },
+    birthday: {
+      type: Date,
+      validate: {
+        validator: function (birthday) {
+          return getAge(birthday) >= 18;
+        },
+        message: 'User must be 18 years or older. ',
+      },
+    },
+    blood: {
+      type: Number,
+      enum: [1, 2, 3, 4],
+    },
+    sex: {
+      type: String,
+      enum: ['male', 'female'],
+    },
+    levelActivity: {
+      type: Number,
+      enum: [1, 2, 3, 4, 5],
+    },
+  },
+  { versionKey: false, _id: false }
+);
 
 /**
  * Schema for the User model.
@@ -14,33 +71,23 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
-      match: [regexpList.email, 'Email must be valid'],
       required: [true, 'Email is required'],
+      match: [regexpList.email, 'Email must be valid'],
       unique: [true, 'Email in use'],
     },
     password: {
       type: String,
-      minlength: [6, 'Password min length 6 characters'],
+      minLength: [6, 'Password min length 6 characters'],
       required: [true, 'Password is required'],
     },
     token: {
       type: String,
-      default: null,
+      default: '',
     },
-    avatarURL: {
-      type: String,
-      default: null,
-    },
-    verify: {
-      type: Boolean,
-      default: false,
-    },
-    verificationToken: {
-      type: String,
-      required: [true, 'Verify token is required'],
-    },
+    avatarUrls: { type: avatarUrlsSchema, default: {} },
+    userParams: { type: userParamsSchema, default: {} },
   },
-  { versionKey: false }
+  { versionKey: false, minimize: false, timestamps: true }
 );
 
 // Handle Mongoose save errors using a post middleware

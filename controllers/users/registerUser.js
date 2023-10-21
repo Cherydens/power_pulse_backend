@@ -1,12 +1,13 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const { User } = require('../../models/users');
+const User = require('../../models/user');
 const { controllerWrapper, HttpError } = require('../../utils');
 
 const { SECRET_KEY } = process.env;
 
 const registerUser = controllerWrapper(async (req, res) => {
+  console.log(req.body);
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (user) {
