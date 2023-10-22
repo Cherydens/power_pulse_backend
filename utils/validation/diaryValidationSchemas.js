@@ -6,7 +6,8 @@ const { validateErrorMessageList } = require('../../variables');
  * Joi schema for validating the request body when product add in diary.
  */
 const productSchema = Joi.object({
-  date: Joi.string().format('dd/mm/YYYY').required(),
+  // date: Joi.string().pattern('dd/mm/YYYY').required(),
+  date: Joi.string().required(),
   amount: Joi.number().required(),
   calories: Joi.number().required(),
 }).messages(validateErrorMessageList);
@@ -15,7 +16,8 @@ const productSchema = Joi.object({
  * Joi schema for validating the request body when exercise add in diary.
  */
 const exerciseSchema = Joi.object({
-  date: Joi.string().format('dd/mm/YYYY').required(),
+  // date: Joi.string().pattern('dd/mm/YYYY').required(),
+  date: Joi.string().required(),
   time: Joi.number().required(),
   calories: Joi.number().required(),
 }).messages(validateErrorMessageList);
