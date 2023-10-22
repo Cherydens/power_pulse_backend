@@ -20,7 +20,6 @@ const registerUser = controllerWrapper(async (req, res) => {
 
   const newUser = await User.create({
     ...userData,
-    avatarUrl: '',
     password: hashPassword,
   });
 
