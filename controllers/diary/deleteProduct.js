@@ -1,0 +1,14 @@
+const Products = require('../../models/products');
+const { controllerWrapper } = require('../../utils/wrappers/controllerWrapper');
+
+// Контролер видалення продукту що містяться в щоденнику користувача за визначену дату
+const deleteProduct = controllerWrapper(async (req, res) => {
+  const { productId } = req.params;
+  const result = await Products.findByIdAndRemove(productId);
+  //  Response with the object of exercises
+  res.status(202).json(result);
+});
+
+module.exports = {
+  deleteProduct,
+};

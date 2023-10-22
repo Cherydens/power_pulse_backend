@@ -3,7 +3,7 @@
 const express = require('express');
 
 const { validateBody, authenticate } = require('../../middlewares');
-const controllers = require('../../controllers/diary');
+const controllers = require('../../controllers/');
 const { exerciseSchema, productSchema } = require('../../utils');
 
 // An Express router object is created:
