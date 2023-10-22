@@ -1,24 +1,20 @@
+const { userParamsList } = require('../../variables');
 const getAge = require('./getAge');
 
-const getBmr = ({currentWeight, height, birthday, sex, levelActivity}) => {
-  const activityIndex = {
-    1: 1.2,
-    2: 1.375,
-    3: 1.55,
-    4: 1.725,
-    5: 1.9,
-  };
-
-  const sexIndex = {
-    male: 5,
-    female: -161,
-  };
+const getBmr = userParams => {
+  if (!userParams) {
+    return null;
+  }
+  const { currentWeight, height, birthday, sex, levelActivity } = userParams;
 
   const age = getAge(birthday);
 
   return Math.round(
-    (10 * currentWeight + 6.25 * height - 5 * age + sexIndex[sex]) *
-      activityIndex[levelActivity]
+    (userParamsList.weightIndex * currentWeight +
+      userParamsList.heightIndex * height -
+      userParamsList.ageIndex * age +
+      userParamsList.sexIndex[sex]) *
+      userParamsList.activityIndex[levelActivity]
   );
 };
 

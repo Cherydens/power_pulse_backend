@@ -1,17 +1,29 @@
 const { Schema, model } = require('mongoose');
 
 const { handleMongooseError, getAge } = require('../utils');
-const { regexpList } = require('../variables');
+const { regexpList, userParamsList } = require('../variables');
 
 /**
  * Schema for the AvatarUrls model.
  */
 const avatarUrlsSchema = new Schema(
   {
-    mobile: {
+    avatar_37x37: {
       type: String,
     },
-    desktop: {
+    avatar_46x46: {
+      type: String,
+    },
+    avatar_90x90: {
+      type: String,
+    },
+    avatar_150x150: {
+      type: String,
+    },
+    avatar_180x180: {
+      type: String,
+    },
+    avatar_300x300: {
       type: String,
     },
   },
@@ -25,36 +37,36 @@ const userParamsSchema = new Schema(
   {
     height: {
       type: Number,
-      min: 150,
+      min: userParamsList.minHeight,
     },
     currentWeight: {
       type: Number,
-      min: 35,
+      min: userParamsList.minCurrentWeight,
     },
     desiredWeight: {
       type: Number,
-      min: 35,
+      min: userParamsList.minDesiredWeight,
     },
     birthday: {
       type: Date,
       validate: {
         validator: function (birthday) {
-          return getAge(birthday) >= 18;
+          return getAge(birthday) >= userParamsList.minAge;
         },
-        message: 'User must be 18 years or older. ',
+        message: `User must be ${userParamsList.minAge} years or older.`,
       },
     },
     blood: {
       type: Number,
-      enum: [1, 2, 3, 4],
+      enum: userParamsList.bloodTypes,
     },
     sex: {
       type: String,
-      enum: ['male', 'female'],
+      enum: userParamsList.sexTypes,
     },
     levelActivity: {
       type: Number,
-      enum: [1, 2, 3, 4, 5],
+      enum: userParamsList.levelActivityTypes,
     },
   },
   { versionKey: false, _id: false }
@@ -77,15 +89,18 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      minLength: [6, 'Password min length 6 characters'],
+      minLength: [
+        userParamsList.passwordMinLength,
+        `Password min length ${userParamsList.passwordMinLength} characters`,
+      ],
       required: [true, 'Password is required'],
     },
     token: {
       type: String,
       default: '',
     },
-    avatarUrls: { type: avatarUrlsSchema, default: {} },
-    userParams: { type: userParamsSchema, default: {} },
+    avatarUrls: { type: avatarUrlsSchema, default: null },
+    userParams: { type: userParamsSchema, default: null },
   },
   { versionKey: false, minimize: false, timestamps: true }
 );

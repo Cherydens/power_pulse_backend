@@ -1,6 +1,10 @@
 const Joi = require('joi');
 
-const { regexpList, validateErrorMessageList } = require('../../variables');
+const {
+  regexpList,
+  validateErrorMessageList,
+  userParamsList,
+} = require('../../variables');
 const getAge = require('../aboutUser/getAge');
 
 /**
@@ -14,7 +18,7 @@ const registerUserSchema = Joi.object({
     .email()
     .pattern(regexpList.email)
     .required(),
-  password: Joi.string().min(6).required(),
+  password: Joi.string().min(userParamsList.passwordMinLength).required(),
 }).messages(validateErrorMessageList);
 
 /**
@@ -27,28 +31,34 @@ const loginUserSchema = Joi.object({
     .email()
     .pattern(regexpList.email)
     .required(),
-  password: Joi.string().min(6).required(),
+  password: Joi.string().min(userParamsList.passwordMinLength).required(),
 }).messages(validateErrorMessageList);
 
 /**
  * Joi schema for validating the request body when updating in a userParams.
  */
 const updateUserParamsSchema = Joi.object({
-  height: Joi.number().min(150).required(),
-  currentWeight: Joi.number().min(35).required(),
-  desiredWeight: Joi.number().min(35).required(),
+  height: Joi.number().min(userParamsList.minHeight).required(),
+  currentWeight: Joi.number().min(userParamsList.minCurrentWeight).required(),
+  desiredWeight: Joi.number().min(userParamsList.minDesiredWeight).required(),
   birthday: Joi.date()
     .max('now')
     .custom((value, helpers) => {
-      if (getAge(value) < 18) {
-        return helpers.error('date.min', { limit: '18 years' });
+      if (getAge(value) < userParamsList.minAge) {
+        return helpers.error('date.min', { limit: userParamsList.minAge });
       }
       return value;
     })
     .required(),
-  blood: Joi.number().valid(1, 2, 3, 4).required(),
-  sex: Joi.string().valid('male', 'female').required(),
-  levelActivity: Joi.number().valid(1, 2, 3, 4, 5).required(),
+  blood: Joi.number()
+    .valid(...userParamsList.bloodTypes)
+    .required(),
+  sex: Joi.string()
+    .valid(...userParamsList.sexTypes)
+    .required(),
+  levelActivity: Joi.number()
+    .valid(...userParamsList.levelActivityTypes)
+    .required(),
 }).messages(validateErrorMessageList);
 
 /**

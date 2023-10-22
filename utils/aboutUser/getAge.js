@@ -1,4 +1,7 @@
 const getAge = dateString => {
+  if (!dateString) {
+    return null;
+  }
   const today = new Date();
   const birthDate = new Date(dateString);
   const age = today.getFullYear() - birthDate.getFullYear();

@@ -2,14 +2,10 @@ const User = require('../../models/user');
 const { getBmr, controllerWrapper } = require('../../utils');
 
 const updateUserParams = controllerWrapper(async (req, res) => {
-  const { email } = req.user;
+  const { _id, name, email, avatarUrls, createdAt } = req.user;
   const userParams = { ...req.body };
 
-  const { name, avatarUrls, createdAt } = await User.findOneAndUpdate(
-    { email },
-    { userParams },
-    { new: true }
-  );
+  await User.findByIdAndUpdate(_id, { userParams });
 
   res.status(200).json({
     user: {
