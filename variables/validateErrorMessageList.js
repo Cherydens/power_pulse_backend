@@ -13,7 +13,7 @@ const validateErrorMessageList = {
 
   'date.base': '{#key} should be a valid date.',
   'date.max': '{#key} cannot be in the future.',
-  'date.min': '{#key} must be greater than or equal to {#limit}.',
+  'date.min': 'User must be {#limit} years or older.',
 
   'object.unknown': '{#key} field is not allowed',
   'object.min': 'missing fields',

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const path = require('path');
 
 const app = require('./app');
 const { createFolderIsNotExist } = require('./utils');
@@ -20,18 +19,10 @@ mongoose
       // Create temp folder if it is not exist
       await createFolderIsNotExist(dirNames.TEMP_DIR);
 
-      // Create public folder if it is not exist
-      await createFolderIsNotExist(dirNames.PUBLIC_DIR);
-
-      // Create avatar folder if it is not exist
-      await createFolderIsNotExist(
-        path.join(dirNames.PUBLIC_DIR, dirNames.AVATARS_DIR)
-      );
-
       console.log(`Server running. Use our API on port: ${PORT}`);
     });
   })
-  .catch((error) => {
+  .catch(error => {
     console.log(error.message);
     process.exit(1);
   });
@@ -42,7 +33,7 @@ module.exports = {
   connect: () => {
     mongoose.connect(DB_HOST);
   },
-  disconnect: (done) => {
+  disconnect: done => {
     mongoose.disconnect(done);
   },
 };
