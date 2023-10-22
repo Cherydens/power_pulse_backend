@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const { handleMongooseError } = require('../utils');
+
 const notAllowedSchema = new Schema(
   {
     1: {

@@ -4,17 +4,11 @@ const { handleMongooseError } = require('../utils');
 
 const exerciseCategoriesSchema = new Schema(
   {
-    filter: {
-      type: String,
-    },
-    name: {
-      type: String,
-    },
-    imgURL: {
+    title: {
       type: String,
     },
   },
-  { versionKey: false }
+  { versionKey: false, _id: false }
 );
 
 exerciseCategoriesSchema.post('save', handleMongooseError);
