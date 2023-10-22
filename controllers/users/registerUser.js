@@ -36,7 +36,6 @@ const registerUser = controllerWrapper(async (req, res) => {
       name: newUser.name,
       email: newUser.email,
       avatarUrls: newUser.avatarUrls,
-      userParams: newUser.userParams,
       createdAt: newUser.createdAt,
     },
   });

@@ -30,7 +30,6 @@ const loginUser = controllerWrapper(async (req, res) => {
       name: user.name,
       email: user.email,
       avatarUrls: user.avatarUrls,
-      userParams: user.userParams,
       createdAt: user.createdAt,
     },
   });

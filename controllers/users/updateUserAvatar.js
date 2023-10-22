@@ -13,7 +13,7 @@ const updateUserAvatar = controllerWrapper(async (req, res) => {
   }
 
   const fileExt = originalname.split('.').pop();
-  const { name, email, _id, userParams, createdAt } = req.user;
+  const { _id } = req.user;
 
   const cloudinaryUrl = `https://res.cloudinary.com/${process.env.CLOUDINARY_NAME}/image/upload`;
   const fullFileName = `${filename}.${fileExt}`;
@@ -31,11 +31,7 @@ const updateUserAvatar = controllerWrapper(async (req, res) => {
 
   res.status(200).json({
     user: {
-      name,
-      email,
       avatarUrls,
-      userParams,
-      createdAt,
     },
   });
 });
