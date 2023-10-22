@@ -24,9 +24,9 @@ router.get('/', authenticate, getDashboard);
 
 router.get('/day', authenticate, getDayDashboard);
 
-router.delete('/day:exerciseId', authenticate, deleteExercise);
-
 router.delete('/day:productId', authenticate, deleteProduct);
+
+router.delete('/day:exerciseId', authenticate, deleteExercise);
 
 router.post(
   '/day/diaryProduct',
