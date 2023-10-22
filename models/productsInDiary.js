@@ -7,7 +7,7 @@ const { handleMongooseError } = require('../utils');
  */
 const productSchema = new Schema(
   {
-    product: {
+    title: {
       type: String,
       required: [true, 'Title is required'],
     },
