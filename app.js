@@ -9,8 +9,6 @@ const trainingRouter = require('./routes/api/training');
 const productsRouter = require('./routes/api/products');
 const diaryRouter = require('./routes/api/diary');
 
-const { dirNames } = require('./variables');
-
 const app = express();
 
 // Determine the logging format based on the environment
