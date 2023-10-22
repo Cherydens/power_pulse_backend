@@ -1,6 +1,6 @@
 const Products = require('../../models/productsInDiary');
 const Exercises = require('../../models/exercisesInDiary');
-const { controllerWrapper } = require('../../utils/wrappers/controllerWrapper');
+const { controllerWrapper } = require('../../utils/index');
 
 // Контролер отримання всіх вправ та продуктів що містяться в щоденнику користувача
 const getDashboard = controllerWrapper(async (req, res) => {

@@ -1,5 +1,5 @@
 const Products = require('../../models/productsInDiary');
-const { controllerWrapper } = require('../../utils/wrappers/controllerWrapper');
+const { controllerWrapper } = require('../../utils/index');
 
 // Контролер додавання продукту що містяться в щоденнику користувача за визначену дату
 const addProductInDiary = controllerWrapper(async (req, res) => {

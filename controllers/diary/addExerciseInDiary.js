@@ -1,5 +1,5 @@
 const Exercises = require('../../models/exercisesInDiary');
-const { controllerWrapper } = require('../../utils/wrappers/controllerWrapper');
+const { controllerWrapper } = require('../../utils/index');
 
 // Контролер додавання вправи що містяться в щоденнику користувача за визначену дату
 const addExerciseInDiary = controllerWrapper(async (req, res) => {

@@ -1,5 +1,5 @@
 const Exercises = require('../../models/exercisesInDiary');
-const { controllerWrapper } = require('../../utils/wrappers/controllerWrapper');
+const { controllerWrapper } = require('../../utils/index');
 
 // Контролер видалення вправи що містяться в щоденнику користувача за визначену дату
 const deleteExercise = controllerWrapper(async (req, res) => {

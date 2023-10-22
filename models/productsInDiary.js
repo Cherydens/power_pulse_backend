@@ -36,6 +36,6 @@ productSchema.post('save', handleMongooseError);
 /**
  * Mongoose model for the 'product' collection using the userSchema.
  */
-const Products = model('product', productSchema);
+const Products = model('productDiary', productSchema);
 
 module.exports = Products;

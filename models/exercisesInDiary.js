@@ -36,6 +36,6 @@ exercisesSchema.post('save', handleMongooseError);
 /**
  * Mongoose model for the 'exercise' collection using the userSchema.
  */
-const Exercises = model('exercise', exercisesSchema);
+const Exercises = model('exerciseDiary', exercisesSchema);
 
 module.exports = Exercises;

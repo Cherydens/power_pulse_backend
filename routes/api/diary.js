@@ -3,32 +3,43 @@
 const express = require('express');
 
 const { validateBody, authenticate } = require('../../middlewares');
-const controllers = require('../../controllers/diary/index');
+
+const { getDashboard } = require('../../controllers/diary/getDashboard');
+const { getDayDashboard } = require('../../controllers/diary/getDayDashboard');
+const { deleteExercise } = require('../../controllers/diary/deleteExercise');
+const { deleteProduct } = require('../../controllers/diary/deleteProduct');
+const {
+  addProductInDiary,
+} = require('../../controllers/diary/addProductInDiary');
+const {
+  addExerciseInDiary,
+} = require('../../controllers/diary/addExerciseInDiary');
+
 const { exerciseSchema, productSchema } = require('../../utils');
 
 // An Express router object is created:
 const router = express.Router();
 
-router.get('/', authenticate, controllers.getDashboard);
+router.get('/', authenticate, getDashboard);
 
-router.get('/day', authenticate, controllers.getDayDashboard);
+router.get('/day', authenticate, getDayDashboard);
 
-router.delete('/day:exerciseId', authenticate, controllers.deleteExercise);
+router.delete('/day:exerciseId', authenticate, deleteExercise);
 
-router.delete('/day:productId', authenticate, controllers.deleteProduct);
+router.delete('/day:productId', authenticate, deleteProduct);
 
 router.post(
   '/day',
   authenticate,
   validateBody(productSchema),
-  controllers.addProductInDiary
+  addProductInDiary
 );
 
 router.post(
   '/day',
   authenticate,
   validateBody(exerciseSchema),
-  controllers.addExerciseInDiary
+  addExerciseInDiary
 );
 
 module.exports = router;
