@@ -7,6 +7,7 @@ const { validateErrorMessageList } = require('../../variables');
  */
 const productSchema = Joi.object({
   // date: Joi.string().pattern('dd/mm/YYYY').required(),
+  // date: Joi.date().format('DD/MM/YYYY'),
   date: Joi.string().required(),
   amount: Joi.number().required(),
   calories: Joi.number().required(),
@@ -17,6 +18,7 @@ const productSchema = Joi.object({
  */
 const exerciseSchema = Joi.object({
   // date: Joi.string().pattern('dd/mm/YYYY').required(),
+  // date: Joi.date().format('DD/MM/YYYY'),
   date: Joi.string().required(),
   time: Joi.number().required(),
   calories: Joi.number().required(),

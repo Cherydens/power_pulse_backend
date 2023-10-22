@@ -13,7 +13,7 @@ const productSchema = new Schema(
     },
     date: {
       type: String,
-      default: null,
+      default: '',
       required: true,
     },
     amount: {

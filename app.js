@@ -29,7 +29,7 @@ app.use(express.json());
 app.use('/api/users', authRouter);
 app.use('/api/training', trainingRouter);
 app.use('/api/products', productsRouter);
-app.use('/api/products', diaryRouter);
+app.use('/api/diary', diaryRouter);
 
 // Middleware for handling 404 errors (Not Found)
 app.use((req, res) => {
