@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
 const app = require('./app');
-const { createFolderIsNotExist } = require('./utils');
-const { dirNames } = require('./variables');
+
 
 // Retrieve environment variables
 const { DB_HOST, PORT = 3000 } = process.env;
@@ -16,8 +15,7 @@ mongoose
   .then(() => {
     console.log('Database connection successful');
     app.listen(PORT, async () => {
-      // Create temp folder if it is not exist
-      await createFolderIsNotExist(dirNames.TEMP_DIR);
+      
 
       console.log(`Server running. Use our API on port: ${PORT}`);
     });

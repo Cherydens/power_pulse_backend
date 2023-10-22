@@ -8,8 +8,6 @@ const authRouter = require('./routes/api/users');
 const trainingRouter = require('./routes/api/training');
 const productsRouter = require('./routes/api/products');
 
-const { dirNames } = require('./variables');
-
 const app = express();
 
 // Determine the logging format based on the environment
