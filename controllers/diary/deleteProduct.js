@@ -1,4 +1,4 @@
-const Products = require('../../models/products');
+const Products = require('../../models/productsInDiary');
 const { controllerWrapper } = require('../../utils/wrappers/controllerWrapper');
 
 // Контролер видалення продукту що містяться в щоденнику користувача за визначену дату

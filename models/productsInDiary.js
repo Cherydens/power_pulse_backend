@@ -7,21 +7,24 @@ const { handleMongooseError } = require('../utils');
  */
 const productSchema = new Schema(
   {
-    title: {
+    product: {
       type: String,
-      required: [true, 'title is required'],
-    },
-    calories: {
-      type: String,
-      default: null,
-    },
-    amount: {
-      type: String,
-      default: null,
+      required: [true, 'Title is required'],
     },
     date: {
       type: String,
+      default: null,
+      required: true,
+    },
+    amount: {
+      type: Number,
+      default: null,
+      required: true,
+    },
+    calories: {
+      type: Number,
       default: '',
+      required: true,
     },
   },
   { versionKey: false }

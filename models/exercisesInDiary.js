@@ -7,26 +7,24 @@ const { handleMongooseError } = require('../utils');
  */
 const exercisesSchema = new Schema(
   {
-    bodyPart: {
+    exercise: {
       type: String,
+      required: [true, 'Title is required'],
     },
-    equipment: {
+    date: {
       type: String,
-    },
-    gifUrl: {
-      type: String,
-    },
-    name: {
-      type: String,
-    },
-    target: {
-      type: String,
-    },
-    burnedCalories: {
-      type: Number,
+      default: '',
+      required: true,
     },
     time: {
       type: Number,
+      default: null,
+      required: true,
+    },
+    calories: {
+      type: Number,
+      default: null,
+      required: true,
     },
   },
   { versionKey: false }
