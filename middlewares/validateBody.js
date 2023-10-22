@@ -6,7 +6,7 @@ const { HttpError } = require('../utils');
  * @param {Joi.Schema} schema - Joi schema for request body validation
  * @returns {function} Middleware function to validate the request body
  */
-const validateBody = (schema) => {
+const validateBody = schema => {
   return (req, res, next) => {
     // Validate the request body using the provided schema
     const { error } = schema.validate(req.body);

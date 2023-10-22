@@ -7,6 +7,7 @@ require('dotenv').config();
 const authRouter = require('./routes/api/users');
 const trainingRouter = require('./routes/api/training');
 const productsRouter = require('./routes/api/products');
+const diaryRouter = require('./routes/api/diary');
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use('/api/users', authRouter);
 app.use('/api/training', trainingRouter);
 app.use('/api/products', productsRouter);
+app.use('/api/diary', diaryRouter);
 
 // Middleware for handling 404 errors (Not Found)
 app.use((req, res) => {
