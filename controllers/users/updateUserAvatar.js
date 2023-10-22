@@ -5,24 +5,26 @@ const updateUserAvatar = controllerWrapper(async (req, res) => {
   if (!req.file) {
     throw new HttpError(400, 'Avatar file is required');
   }
+
   const { filename, mimetype, originalname } = req.file;
-  const fileExt = originalname.split('.').pop();
 
   if (!mimetype.includes('image')) {
     throw new HttpError(400, 'File type must be an image');
   }
 
+  const fileExt = originalname.split('.').pop();
   const { name, email, _id, userParams, createdAt } = req.user;
 
-  const CLOUDINARY_URL = `https://res.cloudinary.com/${process.env.CLOUDINARY_NAME}/image/upload`;
+  const cloudinaryUrl = `https://res.cloudinary.com/${process.env.CLOUDINARY_NAME}/image/upload`;
+  const fullFileName = `${filename}.${fileExt}`;
 
   const avatarUrls = {
-    avatar_37x37: `${CLOUDINARY_URL}/h_37,w_37/${filename}.${fileExt}`,
-    avatar_46x46: `${CLOUDINARY_URL}/h_46,w_46/${filename}.${fileExt}`,
-    avatar_90x90: `${CLOUDINARY_URL}/h_90,w_90/${filename}.${fileExt}`,
-    avatar_150x150: `${CLOUDINARY_URL}/h_150,w_150/${filename}.${fileExt}`,
-    avatar_180x180: `${CLOUDINARY_URL}/h_180,w_180/${filename}.${fileExt}`,
-    avatar_300x300: `${CLOUDINARY_URL}/h_300,w_300/${filename}.${fileExt}`,
+    avatar_37x37: `${cloudinaryUrl}/h_37,w_37/${fullFileName}`,
+    avatar_46x46: `${cloudinaryUrl}/h_46,w_46/${fullFileName}`,
+    avatar_90x90: `${cloudinaryUrl}/h_90,w_90/${fullFileName}`,
+    avatar_150x150: `${cloudinaryUrl}/h_150,w_150/${fullFileName}`,
+    avatar_180x180: `${cloudinaryUrl}/h_180,w_180/${fullFileName}`,
+    avatar_300x300: `${cloudinaryUrl}/h_300,w_300/${fullFileName}`,
   };
 
   await User.findByIdAndUpdate(_id, { avatarUrls });
