@@ -15,7 +15,7 @@ const {
   addExerciseInDiary,
 } = require('../../controllers/diary/addExerciseInDiary');
 
-const { exerciseSchema, productSchema } = require('../../utils');
+const diaryValidationSchemas = require('../../utils/validation/diaryValidationSchemas');
 
 // An Express router object is created:
 const router = express.Router();
@@ -31,14 +31,14 @@ router.delete('/day/diaryExercise/:exerciseId', authenticate, deleteExercise);
 router.post(
   '/day/diaryProduct',
   authenticate,
-  // validateBody(productSchema),
+  validateBody(diaryValidationSchemas.productSchema),
   addProductInDiary
 );
 
 router.post(
   '/day/diaryExercise',
   authenticate,
-  // validateBody(exerciseSchema),
+  validateBody(diaryValidationSchemas.exerciseSchema),
   addExerciseInDiary
 );
 
