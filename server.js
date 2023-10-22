@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const path = require('path');
 
 const app = require('./app');
 const { createFolderIsNotExist } = require('./utils');
@@ -19,14 +18,6 @@ mongoose
     app.listen(PORT, async () => {
       // Create temp folder if it is not exist
       await createFolderIsNotExist(dirNames.TEMP_DIR);
-
-      // Create public folder if it is not exist
-      await createFolderIsNotExist(dirNames.PUBLIC_DIR);
-
-      // Create avatar folder if it is not exist
-      await createFolderIsNotExist(
-        path.join(dirNames.PUBLIC_DIR, dirNames.AVATARS_DIR)
-      );
 
       console.log(`Server running. Use our API on port: ${PORT}`);
     });

@@ -4,9 +4,9 @@ const handleMongooseError = require('./errors/handleMongooseError');
 const userValidationSchemas = require('./validation/userValidationSchemas');
 const diaryValidationSchemas = require('./validation/diaryValidationSchemas');
 const createFolderIsNotExist = require('./fileStructure/createFolderIsNotExist');
-const imageResizer = require('./imageHandlers/imageResizer');
-const sendEmail = require('./email/sendEmail');
-const createVerificationEmail = require('./email/createVerificationEmail');
+const getAge = require('./aboutUser/getAge');
+const getBmr = require('./aboutUser/getBmr');
+const cloudinaryUpload = require('./imageHandlers/cloudinaryUpload');
 
 module.exports = {
   HttpError,
@@ -15,7 +15,7 @@ module.exports = {
   userValidationSchemas,
   diaryValidationSchemas,
   createFolderIsNotExist,
-  imageResizer,
-  sendEmail,
-  createVerificationEmail,
+  getAge,
+  getBmr,
+  cloudinaryUpload,
 };

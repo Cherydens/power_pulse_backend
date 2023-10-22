@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const authRouter = require('./routes/api/users');
 const trainingRouter = require('./routes/api/training');
-const diarygRouter = require('./routes/api/diary');
+const productsRouter = require('./routes/api/products');
 
 const { dirNames } = require('./variables');
 
@@ -24,12 +24,10 @@ app.use(cors());
 // Middleware for parsing JSON request bodies
 app.use(express.json());
 
-app.use(express.static(dirNames.PUBLIC_DIR));
-
 // Routes for user authentication and contact management
 app.use('/api/users', authRouter);
 app.use('/api/training', trainingRouter);
-app.use('/api/diary', diarygRouter);
+app.use('/api/products', productsRouter);
 
 // Middleware for handling 404 errors (Not Found)
 app.use((req, res) => {
