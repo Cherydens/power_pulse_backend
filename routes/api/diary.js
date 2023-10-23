@@ -4,7 +4,6 @@ const express = require('express');
 
 const { validateBody, authenticate } = require('../../middlewares');
 
-const { getDashboard } = require('../../controllers/diary/getDashboard');
 const { getDayDashboard } = require('../../controllers/diary/getDayDashboard');
 const { deleteExercise } = require('../../controllers/diary/deleteExercise');
 const { deleteProduct } = require('../../controllers/diary/deleteProduct');
@@ -20,23 +19,21 @@ const diaryValidationSchemas = require('../../utils/validation/diaryValidationSc
 // An Express router object is created:
 const router = express.Router();
 
-router.get('/', authenticate, getDashboard);
-
 router.get('/day', authenticate, getDayDashboard);
 
-router.delete('/day/diaryProduct/:productId', authenticate, deleteProduct);
+router.delete('/day/diaryProducts/:productId', authenticate, deleteProduct);
 
-router.delete('/day/diaryExercise/:exerciseId', authenticate, deleteExercise);
+router.delete('/day/diaryExercises/:exerciseId', authenticate, deleteExercise);
 
 router.post(
-  '/day/diaryProduct',
+  '/day/diaryProducts',
   authenticate,
   validateBody(diaryValidationSchemas.productSchema),
   addProductInDiary
 );
 
 router.post(
-  '/day/diaryExercise',
+  '/day/diaryExercises',
   authenticate,
   validateBody(diaryValidationSchemas.exerciseSchema),
   addExerciseInDiary
