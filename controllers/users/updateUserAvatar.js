@@ -21,7 +21,9 @@ const updateUserAvatar = controllerWrapper(async (req, res) => {
   const avatarUrls = {
     avatar_37x37: `${cloudinaryUrl}/h_37,w_37/${fullFileName}`,
     avatar_46x46: `${cloudinaryUrl}/h_46,w_46/${fullFileName}`,
+    avatar_74x74: `${cloudinaryUrl}/h_74,w_74/${fullFileName}`,
     avatar_90x90: `${cloudinaryUrl}/h_90,w_90/${fullFileName}`,
+    avatar_92x92: `${cloudinaryUrl}/h_92,w_92/${fullFileName}`,
     avatar_150x150: `${cloudinaryUrl}/h_150,w_150/${fullFileName}`,
     avatar_180x180: `${cloudinaryUrl}/h_180,w_180/${fullFileName}`,
     avatar_300x300: `${cloudinaryUrl}/h_300,w_300/${fullFileName}`,
