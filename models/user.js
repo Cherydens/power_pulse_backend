@@ -14,7 +14,13 @@ const avatarUrlsSchema = new Schema(
     avatar_46x46: {
       type: String,
     },
+    avatar_74x74: {
+      type: String,
+    },
     avatar_90x90: {
+      type: String,
+    },
+    avatar_92x92: {
       type: String,
     },
     avatar_150x150: {
