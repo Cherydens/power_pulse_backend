@@ -43,6 +43,7 @@ const getAllProducts = controllerWrapper(async (req, res) => {
         break;
     }
   }
+
   const result = await Products.find(
     {
       title: { $regex: title, $options: 'i' },

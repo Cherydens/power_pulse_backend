@@ -6,8 +6,6 @@ const router = express.Router();
 
 router.get('/exercises', authenticate, controllers.getAllExercises);
 
-router.get('/categories', authenticate, controllers.getExercisesCategories);
-
 router.get(
   '/subcategories',
   authenticate,
