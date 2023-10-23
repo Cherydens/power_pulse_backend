@@ -7,7 +7,7 @@ const { handleMongooseError } = require('../utils');
  */
 const productSchema = new Schema(
   {
-    exercise_ID: {
+    product_ID: {
       type: String,
       required: [true, 'ID is required'],
     },

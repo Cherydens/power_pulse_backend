@@ -26,14 +26,14 @@ router.delete('/day/diaryProducts/:productId', authenticate, deleteProduct);
 router.delete('/day/diaryExercises/:exerciseId', authenticate, deleteExercise);
 
 router.post(
-  '/day/diaryProduct',
+  '/day/diaryProducts',
   authenticate,
   validateBody(diaryValidationSchemas.productSchema),
   addProductInDiary
 );
 
 router.post(
-  '/day/diaryExercise',
+  '/day/diaryExercises',
   authenticate,
   validateBody(diaryValidationSchemas.exerciseSchema),
   addExerciseInDiary
