@@ -7,9 +7,9 @@ const { handleMongooseError } = require('../utils');
  */
 const exercisesSchema = new Schema(
   {
-    title: {
+    product_ID: {
       type: String,
-      required: [true, 'Title is required'],
+      required: [true, 'ID is required'],
     },
     date: {
       type: String,
