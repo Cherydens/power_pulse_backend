@@ -8,6 +8,4 @@ const addExerciseInDiary = controllerWrapper(async (req, res) => {
   res.status(201).json(exercise);
 });
 
-module.exports = {
-  addExerciseInDiary,
-};
+module.exports = addExerciseInDiary;

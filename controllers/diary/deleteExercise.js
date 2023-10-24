@@ -10,6 +10,4 @@ const deleteExercise = controllerWrapper(async (req, res) => {
   res.status(202).json(result);
 });
 
-module.exports = {
-  deleteExercise,
-};
+module.exports = deleteExercise;
