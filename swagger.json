@@ -37,6 +37,56 @@
         "description": "User's token",
         "format": "token"
       },
+      "UserParams": {
+        "type": "object",
+        "description": "User's params",
+        "required": [
+          "height",
+          "currentWeight",
+          "desiredWeight",
+          "birthday",
+          "blood",
+          "sex",
+          "levelActivity"
+        ],
+        "properties": {
+          "height": {
+            "type": "integer",
+            "description": "User's height",
+            "example": 180
+          },
+          "currentWeight": {
+            "type": "integer",
+            "description": "User's current weight",
+            "example": 90
+          },
+          "desiredWeight": {
+            "type": "integer",
+            "description": "User's desired weight",
+            "example": 70
+          },
+          "birthday": {
+            "type": "string",
+            "description": "User's birthday",
+            "example": "2023-10-22T18:43:34.175Z"
+          },
+          "blood": {
+            "type": "number",
+            "description": "User's blood type",
+            "example": 1
+          },
+          "sex": {
+            "type": "string",
+            "description": "User's sex",
+            "example": "male"
+          },
+          "levelActivity": {
+            "type": "number",
+            "description": "User's level activity",
+            "example": 1
+          }
+        }
+      },
       "AvatarUrls": {
         "type": "object",
         "description": "User's avatar",
@@ -75,24 +125,6 @@
           }
         }
       },
-      "UsersParams": {
-        "type": "object",
-        "description": "User's params",
-        "properties": {
-          "height": {
-            "type": "integer",
-            "example": 180
-          },
-          "currentWeight": {
-            "type": "integer",
-            "example": 90
-          },
-          "currentWeight": {
-            "type": "integer",
-            "example": 90
-          }
-        }
-      },
       "CreatedAt": {
         "type": "string",
         "description": "Time when user was created at",
@@ -126,6 +158,18 @@
           }
         }
       },
+      "NameRequest": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          }
+        }
+      },
+      "UsersParamsRequest": {
+        "$ref": "#/components/schemas/UserParams"
+      },
       "AuthResponse": {
         "type": "object",
         "properties": {
@@ -148,6 +192,37 @@
                 "$ref": "#/components/schemas/CreatedAt"
               }
             }
+          }
+        }
+      },
+      "NameResponse": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "$ref": "#/components/schemas/Name"
+              }
+            }
+          }
+        }
+      },
+      "UsersParamsResponse": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "userParams": {
+                "$ref": "#/components/schemas/UserParams"
+              }
+            }
+          },
+          "bmr": {
+            "type": "number",
+            "description": "User's BMR",
+            "example": 2200
           }
         }
       }
@@ -311,14 +386,127 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegistrationRequest"
+                "$ref": "#/components/schemas/UsersParamsRequest"
               }
             }
           }
         },
         "responses": {
-          "204": {
-            "description": "No content"
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersParamsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          }
+        }
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Update user's params",
+        "description": "Endpoint for updating the user's params",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "User's params object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersParamsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersParamsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          }
+        }
+      },
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get user's params",
+        "description": "Endpoint for getting the user's params",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersParamsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/username": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Update user's name ",
+        "description": "Endpoint for updating the user's name",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Name's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NameRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NameResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
           },
           "401": {
             "description": "Unauthorized",
