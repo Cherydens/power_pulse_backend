@@ -1,6 +1,8 @@
 const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 require('dotenv').config();
 
@@ -28,6 +30,7 @@ app.use('/api/users', authRouter);
 app.use('/api/training', trainingRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/diary', diaryRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Middleware for handling 404 errors (Not Found)
 app.use((req, res) => {
