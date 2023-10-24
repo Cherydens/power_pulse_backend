@@ -11,7 +11,7 @@ const getAllProducts = controllerWrapper(async (req, res) => {
   } = req.query;
   const skip = (page - 1) * limit;
 
-  const blood = req.user.user.userParams.blood;
+  const blood = req.user.userParams.blood;
 
   if (recommended) {
     switch (recommended) {

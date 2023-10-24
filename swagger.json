@@ -573,6 +573,527 @@
           }
         }
       }
+    },
+    "/api/products": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Return all products",
+        "operationId": "getAllProducts",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Items per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 18
+            }
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "choose title of product",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "recommended",
+            "in": "query",
+            "description": "choose recommended or not recommended products",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "choose category of products",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "alcoholic drinks",
+                "berries",
+                "cereals",
+                "dairy",
+                "dried fruits",
+                "eggs",
+                "fish",
+                "flour",
+                "fruits",
+                "meat",
+                "mushrooms",
+                "nuts",
+                "oils and fats",
+                "poppy",
+                "sausage",
+                "seeds",
+                "sesame",
+                "soft drinks",
+                "vegetables and herbs"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "weight": {
+                        "type": "number"
+                      },
+                      "calories": {
+                        "type": "number"
+                      },
+                      "category": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "groupBloodNotAllowed": {
+                        "type": "object",
+                        "properties": {
+                          "1": {
+                            "type": "boolean"
+                          },
+                          "2": {
+                            "type": "boolean"
+                          },
+                          "3": {
+                            "type": "boolean"
+                          },
+                          "4": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/products/categories": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Return all products categories",
+        "operationId": "getProductsCategories",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string"
+                      },
+                      "productsCategories": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/training/exercises": {
+      "get": {
+        "tags": ["Training"],
+        "summary": "Return all exercises",
+        "operationId": "getExercises",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Items per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 18
+            }
+          },
+          {
+            "name": "bodyPart",
+            "in": "query",
+            "description": "choose part of body",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "shoulders",
+                "waist",
+                "back",
+                "upper arms",
+                "upper legs",
+                "cardio",
+                "chest",
+                "neck",
+                "lower arms",
+                "lower legs"
+              ]
+            }
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "description": "choose target",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "abductors",
+                "abs",
+                "adductors",
+                "biceps",
+                "calves",
+                "cardiovascular system",
+                "delts",
+                "forearms",
+                "glutes",
+                "hamstrings",
+                "lats",
+                "levator scapulae",
+                "pectorals",
+                "quads",
+                "serratus anterior",
+                "spine",
+                "traps",
+                "triceps",
+                "upper back"
+              ]
+            }
+          },
+          {
+            "name": "equipment",
+            "in": "query",
+            "description": "choose equipment",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "assisted",
+                "band",
+                "barbell",
+                "body weight",
+                "bosu ball",
+                "cable",
+                "dumbbell",
+                "elliptical machine",
+                "ez barbell",
+                "hammer",
+                "kettlebell",
+                "leverage machine",
+                "medicine ball",
+                "olympic barbell",
+                "resistance band",
+                "roller",
+                "rope",
+                "skierg machine",
+                "sled machine",
+                "smith machine",
+                "stability ball",
+                "stationary bike",
+                "stepmill machine",
+                "tire",
+                "trap bar",
+                "upper body ergometer",
+                "weighted",
+                "wheel roller"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "exercises": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "bodyPart": {
+                            "type": "string"
+                          },
+                          "equipment": {
+                            "type": "string"
+                          },
+                          "gifUrl": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "target": {
+                            "type": "string"
+                          },
+                          "burnedCalories": {
+                            "type": "number"
+                          },
+                          "time": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "pageSize": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/training/subcategories/": {
+      "get": {
+        "tags": ["Training"],
+        "summary": "Return all exercise subcategories",
+        "operationId": "getExerciseSubCategories",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "choose filter of subcategory",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["bodyPart", "muscles", "equipment"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string"
+                      },
+                      "filter": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "imgURL": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
