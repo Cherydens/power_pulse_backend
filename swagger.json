@@ -225,6 +225,19 @@
             "example": 2200
           }
         }
+      },
+      "AvatarResponse": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "avatarUrls": {
+                "$ref": "#/components/schemas/AvatarUrls"
+              }
+            }
+          }
+        }
       }
     },
     "securitySchemes": {
@@ -500,6 +513,52 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/NameResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/avatars": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Update user's avatar",
+        "description": "Endpoint for updating the user's avatar",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "User's avatar",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvatarResponse"
                 }
               }
             }
