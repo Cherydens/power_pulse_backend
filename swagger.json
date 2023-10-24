@@ -1,0 +1,331 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Power Pulse API",
+    "version": "1.0",
+    "description": "Demonstrate Power Pulse API"
+  },
+  "servers": [
+    {
+      "url": "https://power-pulse-api.onrender.com",
+      "description": "Server on render.com"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "Local server"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Name": {
+        "type": "string",
+        "description": "User's name",
+        "example": "David"
+      },
+      "Email": {
+        "type": "string",
+        "description": "User's email",
+        "format": "email"
+      },
+      "Password": {
+        "type": "string",
+        "description": "User's password",
+        "example": "Qwerty123"
+      },
+      "Token": {
+        "type": "string",
+        "description": "User's token",
+        "format": "token"
+      },
+      "AvatarUrls": {
+        "type": "object",
+        "description": "User's avatar",
+        "properties": {
+          "avatar_37x37": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_37,w_37/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
+          },
+          "avatar_46x46": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_46,w_46/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
+          },
+          "avatar_74x74": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_74,w_74/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
+          },
+          "avatar_90x90": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_90,w_90/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
+          },
+          "avatar_92x92": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_92,w_92/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
+          },
+          "avatar_150x150": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_150,w_150/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
+          },
+          "avatar_180x180": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_180,w_180/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
+          },
+          "avatar_300x300": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_300,w_300/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
+          }
+        }
+      },
+      "UsersParams": {
+        "type": "object",
+        "description": "User's params",
+        "properties": {
+          "height": {
+            "type": "integer",
+            "example": 180
+          },
+          "currentWeight": {
+            "type": "integer",
+            "example": 90
+          },
+          "currentWeight": {
+            "type": "integer",
+            "example": 90
+          }
+        }
+      },
+      "CreatedAt": {
+        "type": "string",
+        "description": "Time when user was created at",
+        "format": "Time",
+        "example": "2023-10-22T18:43:34.175Z"
+      },
+      "RegistrationRequest": {
+        "type": "object",
+        "required": ["name", "email", "password"],
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "password": {
+            "$ref": "#/components/schemas/Password"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "password": {
+            "$ref": "#/components/schemas/Password"
+          }
+        }
+      },
+      "AuthResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "$ref": "#/components/schemas/Token"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "$ref": "#/components/schemas/Name"
+              },
+              "email": {
+                "$ref": "#/components/schemas/Email"
+              },
+              "avatarUrls": {
+                "$ref": "#/components/schemas/AvatarUrls"
+              },
+              "createdAt": {
+                "$ref": "#/components/schemas/CreatedAt"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Users endpoints"
+    },
+    {
+      "name": "Products",
+      "description": "Products endpoints"
+    },
+    {
+      "name": "Training",
+      "description": "Training endpoints"
+    }
+  ],
+
+  "paths": {
+    "/api/users/register": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "User's registration",
+        "description": "Endpoint for registration of new user",
+        "parameters": [],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "User's log in",
+        "description": "Endpoint for log in user",
+        "parameters": [],
+        "requestBody": {
+          "description": "LogIn's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Email or password is wrong",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/current": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get current user's information",
+        "description": "Endpoint for get current user's information",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/logout": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Log out user",
+        "description": "Endpoint for logout current user",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/params": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Add user's params",
+        "description": "Endpoint for adding the user's params",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "User's params object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          }
+        }
+      }
+    }
+  }
+}
