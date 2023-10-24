@@ -12,6 +12,4 @@ const getDayDashboard = controllerWrapper(async (req, res) => {
   res.status(200).json(result);
 });
 
-module.exports = {
-  getDayDashboard,
-};
+module.exports = getDayDashboard;

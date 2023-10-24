@@ -1,18 +1,14 @@
-// The necessary modules and libraries are imported:
-
 const express = require('express');
 
 const { validateBody, authenticate } = require('../../middlewares');
 
-const { getDayDashboard } = require('../../controllers/diary/getDayDashboard');
-const { deleteExercise } = require('../../controllers/diary/deleteExercise');
-const { deleteProduct } = require('../../controllers/diary/deleteProduct');
-const {
-  addProductInDiary,
-} = require('../../controllers/diary/addProductInDiary');
 const {
   addExerciseInDiary,
-} = require('../../controllers/diary/addExerciseInDiary');
+  addProductInDiary,
+  deleteExercise,
+  deleteProduct,
+  getDayDashboard,
+} = require('../../controllers/diary/index');
 
 const diaryValidationSchemas = require('../../utils/validation/diaryValidationSchemas');
 

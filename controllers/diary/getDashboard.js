@@ -11,6 +11,4 @@ const getDashboard = controllerWrapper(async (req, res) => {
   res.status(200).json(result);
 });
 
-module.exports = {
-  getDashboard,
-};
+module.exports = getDashboard;

@@ -8,6 +8,4 @@ const addProductInDiary = controllerWrapper(async (req, res) => {
   res.status(201).json(product);
 });
 
-module.exports = {
-  addProductInDiary,
-};
+module.exports = addProductInDiary;

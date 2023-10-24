@@ -10,6 +10,4 @@ const deleteProduct = controllerWrapper(async (req, res) => {
   res.status(202).json(result);
 });
 
-module.exports = {
-  deleteProduct,
-};
+module.exports = deleteProduct;
