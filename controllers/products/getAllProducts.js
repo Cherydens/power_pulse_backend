@@ -1,5 +1,5 @@
 const Products = require('../../models/products');
-const { controllerWrapper } = require('../../utils');
+const { controllerWrapper, HttpError } = require('../../utils');
 
 const getAllProducts = controllerWrapper(async (req, res) => {
   const {
@@ -11,7 +11,12 @@ const getAllProducts = controllerWrapper(async (req, res) => {
   } = req.query;
   const skip = (page - 1) * limit;
 
-  const blood = req.user.userParams.blood;
+  const { userParams } = req.user;
+  if (!userParams) {
+    throw new HttpError(400, 'You must choose your user params');
+  }
+
+  const { blood } = userParams;
 
   if (recommended) {
     switch (recommended) {
