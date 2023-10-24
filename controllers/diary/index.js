@@ -1,19 +1,15 @@
-// const registerUser = require('./registerUser');
-// const loginUser = require('./loginUser');
-// const getCurrentUser = require('./getCurrentUser');
-// const logoutUser = require('./logoutUser');
-// const updateUserParams = require('./updateUserParams');
-// const getUserParams = require('./getUserParams');
-// const updateUserName = require('./updateUserName');
-// const updateUserAvatar = require('./updateUserAvatar');
+const addExerciseInDiary = require('./addExerciseInDiary');
+const addProductInDiary = require('./addProductInDiary');
+const deleteExercise = require('./deleteExercise');
+const deleteProduct = require('./deleteProduct');
+const getDashboard = require('./getDashboard');
+const getDayDashboard = require('./getDayDashboard');
 
-// module.exports = {
-//   registerUser,
-//   loginUser,
-//   getCurrentUser,
-//   logoutUser,
-//   updateUserParams,
-//   getUserParams,
-//   updateUserName,
-//   updateUserAvatar,
-// };
+module.exports = {
+  addExerciseInDiary,
+  addProductInDiary,
+  deleteExercise,
+  deleteProduct,
+  getDashboard,
+  getDayDashboard,
+};
