@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const { handleMongooseError, getAge } = require('../utils');
-const { regexpList, userParamsList } = require('../variables');
+const { userParamsList, authValidateList } = require('../variables');
 
 /**
  * Schema for the AvatarUrls model.
@@ -90,15 +90,11 @@ const userSchema = new Schema(
     email: {
       type: String,
       required: [true, 'Email is required'],
-      match: [regexpList.email, 'Email must be valid'],
+      match: [authValidateList.emailRegExp, 'Email must be valid'],
       unique: [true, 'Email in use'],
     },
     password: {
       type: String,
-      minLength: [
-        userParamsList.passwordMinLength,
-        `Password min length ${userParamsList.passwordMinLength} characters`,
-      ],
       required: [true, 'Password is required'],
     },
     token: {

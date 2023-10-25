@@ -6,6 +6,7 @@ const validateErrorMessageList = {
   'string.base': '{#key} should be a string',
   'string.pattern.base': '{#key} must be valid',
   'string.min': '{#key} must be at least {#limit} characters long',
+  'string.max': '{#key} must be maximum {#limit} characters long',
   'string.email': 'email field must be a valid email',
 
   'number.base': '{#key} should be a number.',

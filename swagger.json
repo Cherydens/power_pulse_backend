@@ -73,16 +73,19 @@
           "blood": {
             "type": "number",
             "description": "User's blood type",
+            "enum": [1, 2, 3, 4],
             "example": 1
           },
           "sex": {
             "type": "string",
             "description": "User's sex",
+            "enum": ["male", "female"],
             "example": "male"
           },
           "levelActivity": {
             "type": "number",
             "description": "User's level activity",
+            "enum": [1, 2, 3, 4, 5],
             "example": 1
           }
         }
