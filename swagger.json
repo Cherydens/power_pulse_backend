@@ -170,6 +170,42 @@
       "UsersParamsRequest": {
         "$ref": "#/components/schemas/UserParams"
       },
+      "DiaryProductsRequest": {
+        "type": "object",
+        "required": ["product_ID", "date", "amount", "calories"],
+        "properties": {
+          "product_ID": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "integer"
+          },
+          "calories": {
+            "type": "integer"
+          }
+        }
+      },
+      "DiaryExesicesRequest": {
+        "type": "object",
+        "required": ["exercise_ID", "date", "amount", "calories"],
+        "properties": {
+          "exercise_ID": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "time": {
+            "type": "integer"
+          },
+          "calories": {
+            "type": "integer"
+          }
+        }
+      },
       "AuthResponse": {
         "type": "object",
         "properties": {
@@ -234,6 +270,107 @@
             "properties": {
               "avatarUrls": {
                 "$ref": "#/components/schemas/AvatarUrls"
+              }
+            }
+          }
+        }
+      },
+      "DiaryDayResponce": {
+        "type": "object",
+        "properties": {
+          "productResult": {
+            "type": "object",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "product_ID": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "integer"
+                },
+                "calories": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "exercisestResult": {
+            "type": "object",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "exercise_ID": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "time": {
+                  "type": "integer"
+                },
+                "calories": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "DiaryProductResponce": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "product_ID": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              },
+              "amount": {
+                "type": "integer"
+              },
+              "calories": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "DiaryExerciseResponce": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "exercise_ID": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              },
+              "time": {
+                "type": "integer"
+              },
+              "calories": {
+                "type": "integer"
               }
             }
           }
@@ -1113,7 +1250,7 @@
           {
             "name": "date",
             "in": "query",
-            "description": "choose exercise and products by date",
+            "description": "Choose exercise and product by date",
             "required": true,
             "schema": {
               "type": "string"
@@ -1126,55 +1263,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "productResult": {
-                      "type": "object",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "_id": {
-                            "type": "string"
-                          },
-                          "product_ID": {
-                            "type": "string"
-                          },
-                          "date": {
-                            "type": "string"
-                          },
-                          "amount": {
-                            "type": "string"
-                          },
-                          "calories": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "exercisestResult": {
-                      "type": "object",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "_id": {
-                            "type": "string"
-                          },
-                          "exercise_ID": {
-                            "type": "string"
-                          },
-                          "date": {
-                            "type": "string"
-                          },
-                          "time": {
-                            "type": "string"
-                          },
-                          "calories": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/DiaryDayResponce"
                 }
               }
             }
@@ -1239,32 +1328,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "resut": {
-                      "type": "object",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "_id": {
-                            "type": "string"
-                          },
-                          "product_ID": {
-                            "type": "string"
-                          },
-                          "date": {
-                            "type": "string"
-                          },
-                          "amount": {
-                            "type": "string"
-                          },
-                          "calories": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/DiaryProductResponce"
                 }
               }
             }
@@ -1317,7 +1381,7 @@
         }
       }
     },
-    "/api/diary/day/diaryProducts/:exerciseId": {
+    "/api/diary/day/diaryExercises/:exerciseId": {
       "delete": {
         "tags": ["Diary"],
         "summary": "Delet exercise in diary by id",
@@ -1344,32 +1408,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "resut": {
-                      "type": "object",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "_id": {
-                            "type": "string"
-                          },
-                          "exercise_ID": {
-                            "type": "string"
-                          },
-                          "date": {
-                            "type": "string"
-                          },
-                          "time": {
-                            "type": "string"
-                          },
-                          "calories": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/DiaryExerciseResponce"
                 }
               }
             }
@@ -1439,21 +1478,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "product_ID": {
-                    "type": "string"
-                  },
-                  "date": {
-                    "type": "string"
-                  },
-                  "amount": {
-                    "type": "string"
-                  },
-                  "calories": {
-                    "type": "string"
-                  }
-                }
+                "$ref": "#/components/schemas/DiaryProductsRequest"
               }
             }
           }
@@ -1464,21 +1489,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "product_ID": {
-                      "type": "string"
-                    },
-                    "date": {
-                      "type": "string"
-                    },
-                    "amount": {
-                      "type": "string"
-                    },
-                    "calories": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/DiaryProductResponce"
                 }
               }
             }
@@ -1537,21 +1548,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "exercise_ID": {
-                    "type": "string"
-                  },
-                  "date": {
-                    "type": "string"
-                  },
-                  "time": {
-                    "type": "string"
-                  },
-                  "calories": {
-                    "type": "string"
-                  }
-                }
+                "$ref": "#/components/schemas/DiaryExesicesRequest"
               }
             }
           }
@@ -1562,21 +1559,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "exercise_ID": {
-                      "type": "string"
-                    },
-                    "date": {
-                      "type": "string"
-                    },
-                    "time": {
-                      "type": "string"
-                    },
-                    "calories": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/DiaryExerciseResponce"
                 }
               }
             }
