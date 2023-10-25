@@ -731,6 +731,21 @@
               }
             }
           },
+          "400": {
+            "description": "User params error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "401": {
             "description": "Authorization error",
             "content": {
