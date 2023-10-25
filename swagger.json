@@ -238,6 +238,27 @@
             }
           }
         }
+      },
+
+      "Statistic": {
+        "type": "object",
+        "properties": {
+          "exerciseTotalQuantity": {
+            "type": "number"
+          },
+          "caloriesTotalQuantity": {
+            "type": "number"
+          },
+          "usersTotalQuantity": {
+            "type": "number"
+          },
+          "timeTotalQuantity": {
+            "type": "number"
+          },
+          "exerciseDoneTotalQuantity": {
+            "type": "number"
+          }
+        }
       }
     },
     "securitySchemes": {
@@ -261,6 +282,10 @@
     {
       "name": "Training",
       "description": "Training endpoints"
+    },
+    {
+      "name": "Statistic",
+      "description": "Statistic endpoints"
     }
   ],
 
@@ -1073,6 +1098,42 @@
                       "type": "string"
                     }
                   }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/statistic": {
+      "get": {
+        "tags": ["Statistic"],
+        "summary": "Return statistic",
+        "operationId": "getStatistic",
+        "description": "Fetch statistic of power pulse app",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Statistic"
                 }
               }
             }
