@@ -96,6 +96,10 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: [true, 'Password is required'],
+      minLength: [
+        authValidateList.passwordMinLength,
+        `Password must be at least ${authValidateList.passwordMinLength} characters long`,
+      ],
     },
     token: {
       type: String,
