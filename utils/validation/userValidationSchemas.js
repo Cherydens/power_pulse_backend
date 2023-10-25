@@ -18,15 +18,7 @@ const registerUserSchema = Joi.object({
     .email()
     .pattern(authValidateList.emailRegExp)
     .required(),
-  password: Joi.string()
-    .min(authValidateList.passwordMinLength)
-    .max(authValidateList.passwordMaxLength)
-    .pattern(authValidateList.passwordRegExp)
-    .required()
-    .messages({
-      'string.pattern.base':
-        'Password must be 8-32 characters long and include at least one digit, one lowercase letter, one uppercase letter and one special character',
-    }),
+  password: Joi.string().min(authValidateList.passwordMinLength).required(),
 }).messages(validateErrorMessageList);
 
 /**

@@ -5,7 +5,8 @@ const logoutUser = require('./logoutUser');
 const updateUserParams = require('./updateUserParams');
 const getUserParams = require('./getUserParams');
 const updateUserName = require('./updateUserName');
-const updateUserAvatar = require('./updateUserAvatar')
+const updateUserAvatar = require('./updateUserAvatar');
+const googleAuth = require('./googleAuth');
 
 module.exports = {
   registerUser,
@@ -16,4 +17,5 @@ module.exports = {
   getUserParams,
   updateUserName,
   updateUserAvatar,
+  googleAuth,
 };

@@ -4,11 +4,23 @@ const {
   validateBody,
   authenticate,
   uploadImage,
+  passport,
 } = require('../../middlewares');
 const controllers = require('../../controllers/users');
 const { userValidationSchemas } = require('../../utils');
 
 const router = express.Router();
+
+router.get(
+  '/google',
+  passport.authenticate('google', { scope: ['email', 'profile'] })
+);
+
+router.get(
+  '/google/callback',
+  passport.authenticate('google', { session: false }),
+  controllers.googleAuth
+);
 
 // Routes for handling various user-related requests are added to this router. Here's their description:
 
