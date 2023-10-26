@@ -11,18 +11,20 @@ const { userValidationSchemas } = require('../../utils');
 
 const router = express.Router();
 
+// Routes for handling various user-related requests are added to this router. Here's their description:
+
+// Route for Google's auth URL (GET /google):
 router.get(
   '/google',
   passport.authenticate('google', { scope: ['email', 'profile'] })
 );
 
+// Route for Google's auth callback (GET /google/callback):
 router.get(
   '/google/callback',
   passport.authenticate('google', { session: false }),
   controllers.googleAuth
 );
-
-// Routes for handling various user-related requests are added to this router. Here's their description:
 
 // Route for user registration (POST /register):
 router.post(

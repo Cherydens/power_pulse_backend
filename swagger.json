@@ -275,6 +275,27 @@
           }
         }
       },
+"Statistic": {
+        "type": "object",
+        "properties": {
+          "exerciseTotalQuantity": {
+            "type": "number"
+          },
+          "caloriesTotalQuantity": {
+            "type": "number"
+          },
+          "usersTotalQuantity": {
+            "type": "number"
+          },
+          "timeTotalQuantity": {
+            "type": "number"
+          },
+          "exerciseDoneTotalQuantity": {
+            "type": "number"
+          }
+        }
+      }
+    },
       "DiaryDayResponce": {
         "type": "object",
         "properties": {
@@ -406,6 +427,33 @@
   ],
 
   "paths": {
+    "/api/users/google": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get Google's auth URL",
+        "description": "Endpoint for getting Google's auth URL",
+        "parameters": [],
+
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "example": "https://accounts.google.com/o/oauth2/auth?access_type=offline&scope=https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email%20openid&prompt=consent&..."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/users/register": {
       "post": {
         "tags": ["Users"],
@@ -610,7 +658,6 @@
         "description": "Endpoint for getting the user's params",
         "parameters": [],
         "security": [{ "Bearer": [] }],
-
         "responses": {
           "200": {
             "description": "OK",
