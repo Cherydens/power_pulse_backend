@@ -275,7 +275,7 @@
           }
         }
       },
-"Statistic": {
+      "Statistic": {
         "type": "object",
         "properties": {
           "exerciseTotalQuantity": {
@@ -294,8 +294,7 @@
             "type": "number"
           }
         }
-      }
-    },
+      },
       "DiaryDayResponce": {
         "type": "object",
         "properties": {
