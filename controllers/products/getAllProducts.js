@@ -31,7 +31,7 @@ const getAllProducts = controllerWrapper(async (req, res) => {
           { skip, limit }
         );
         res.status(200).json(recommendedProducts);
-        break;
+        return;
       case 'false':
         const notRecommendedProducts = await Products.find(
           {
@@ -43,9 +43,9 @@ const getAllProducts = controllerWrapper(async (req, res) => {
           { skip, limit }
         );
         res.status(200).json(notRecommendedProducts);
-        break;
+        return;
       default:
-        break;
+        return;
     }
   }
 
