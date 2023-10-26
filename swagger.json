@@ -422,6 +422,10 @@
     {
       "name": "Diary",
       "description": "Diary endpoints"
+    },
+    {
+      "name": "Statistic",
+      "description": "Statistic endpoints"
     }
   ],
 
@@ -1640,6 +1644,27 @@
                       "type": "string"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/statistic": {
+      "get": {
+        "tags": ["Statistic"],
+        "summary": "Get statistic information",
+        "description": "Endpoint for get statistic information",
+        "parameters": [],
+
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Statistic"
                 }
               }
             }
