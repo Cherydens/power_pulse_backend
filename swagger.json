@@ -1221,7 +1221,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["bodyPart", "muscles", "equipment"]
+              "enum": ["bodyPart", "target", "equipment"]
             }
           }
         ],
