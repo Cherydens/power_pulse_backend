@@ -11,7 +11,7 @@ const getExerciseSubCategories = controllerWrapper(async (req, res) => {
       });
       res.status(200).json(bodyPart);
       break;
-    case 'muscles':
+    case 'target':
       const muscles = await ExerciseSubCategories.find({
         filter: 'Muscles',
       });
