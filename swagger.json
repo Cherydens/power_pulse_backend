@@ -29,8 +29,8 @@
       },
       "Password": {
         "type": "string",
-        "description": "User's password must be at least 6 characters long",
-        "example": "Qwerty-123"
+        "description": "User's password",
+        "example": "Qwerty123"
       },
       "Token": {
         "type": "string",
@@ -73,19 +73,16 @@
           "blood": {
             "type": "number",
             "description": "User's blood type",
-            "enum": [1, 2, 3, 4],
             "example": 1
           },
           "sex": {
             "type": "string",
             "description": "User's sex",
-            "enum": ["male", "female"],
             "example": "male"
           },
           "levelActivity": {
             "type": "number",
             "description": "User's level activity",
-            "enum": [1, 2, 3, 4, 5],
             "example": 1
           }
         }
@@ -173,6 +170,42 @@
       "UsersParamsRequest": {
         "$ref": "#/components/schemas/UserParams"
       },
+      "DiaryProductsRequest": {
+        "type": "object",
+        "required": ["product_ID", "date", "amount", "calories"],
+        "properties": {
+          "product_ID": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "integer"
+          },
+          "calories": {
+            "type": "integer"
+          }
+        }
+      },
+      "DiaryExesicesRequest": {
+        "type": "object",
+        "required": ["exercise_ID", "date", "amount", "calories"],
+        "properties": {
+          "exercise_ID": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "time": {
+            "type": "integer"
+          },
+          "calories": {
+            "type": "integer"
+          }
+        }
+      },
       "AuthResponse": {
         "type": "object",
         "properties": {
@@ -242,7 +275,7 @@
           }
         }
       },
-      "Statistic": {
+"Statistic": {
         "type": "object",
         "properties": {
           "exerciseTotalQuantity": {
@@ -259,6 +292,108 @@
           },
           "exerciseDoneTotalQuantity": {
             "type": "number"
+          }
+        }
+      }
+    },
+      "DiaryDayResponce": {
+        "type": "object",
+        "properties": {
+          "productResult": {
+            "type": "object",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "product_ID": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "integer"
+                },
+                "calories": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "exercisestResult": {
+            "type": "object",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "exercise_ID": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "time": {
+                  "type": "integer"
+                },
+                "calories": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "DiaryProductResponce": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "product_ID": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              },
+              "amount": {
+                "type": "integer"
+              },
+              "calories": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "DiaryExerciseResponce": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "exercise_ID": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              },
+              "time": {
+                "type": "integer"
+              },
+              "calories": {
+                "type": "integer"
+              }
+            }
           }
         }
       }
@@ -286,8 +421,8 @@
       "description": "Training endpoints"
     },
     {
-      "name": "Statistic",
-      "description": "Statistic endpoints"
+      "name": "Diary",
+      "description": "Diary endpoints"
     }
   ],
 
@@ -1148,20 +1283,349 @@
         }
       }
     },
-    "/api/statistic": {
+    "/api/diary/day": {
       "get": {
-        "tags": ["Statistic"],
-        "summary": "Return statistic",
-        "operationId": "getStatistic",
-        "description": "Fetch statistic of power pulse app",
-        "parameters": [],
+        "tags": ["Diary"],
+        "summary": "Return all exercise and products which user add in diary by date",
+        "operationId": "getDayDashboard",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Choose exercise and product by date",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Statistic"
+                  "$ref": "#/components/schemas/DiaryDayResponce"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/diary/day/diaryProducts/:productId": {
+      "delete": {
+        "tags": ["Diary"],
+        "summary": "Delet product in diary by id",
+        "operationId": "deleteProduct",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "Choose product by id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiaryProductResponce"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/diary/day/diaryExercises/:exerciseId": {
+      "delete": {
+        "tags": ["Diary"],
+        "summary": "Delet exercise in diary by id",
+        "operationId": "deleteExercise",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "exerciseId",
+            "in": "path",
+            "description": "Choose exercise by id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiaryExerciseResponce"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/diary/day/diaryProducts": {
+      "post": {
+        "tags": ["Diary"],
+        "summary": "Add product in diary",
+        "operationId": "addProductInDiary",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Product object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiaryProductsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiaryProductResponce"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/diary/day/diaryExercises": {
+      "post": {
+        "tags": ["Diary"],
+        "summary": "Add exercise in diary",
+        "operationId": "addExerciseInDiary",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Exercise object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiaryExesicesRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiaryExerciseResponce"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
