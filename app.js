@@ -10,6 +10,7 @@ const authRouter = require('./routes/api/users');
 const trainingRouter = require('./routes/api/training');
 const productsRouter = require('./routes/api/products');
 const diaryRouter = require('./routes/api/diary');
+const statisticRouter = require('./routes/api/statistic');
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use('/api/users', authRouter);
 app.use('/api/training', trainingRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/diary', diaryRouter);
+app.use('/api/statistic', statisticRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Middleware for handling 404 errors (Not Found)

@@ -6,7 +6,7 @@ const userParamsList = {
   bloodTypes: [1, 2, 3, 4],
   sexTypes: ['male', 'female'],
   levelActivityTypes: [1, 2, 3, 4, 5],
-  passwordMinLength: 6,
+  
   weightIndex: 10,
   heightIndex: 6.25,
   ageIndex: 5,

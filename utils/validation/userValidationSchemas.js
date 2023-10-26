@@ -1,9 +1,9 @@
 const Joi = require('joi');
 
 const {
-  regexpList,
   validateErrorMessageList,
   userParamsList,
+  authValidateList,
 } = require('../../variables');
 const getAge = require('../aboutUser/getAge');
 
@@ -16,22 +16,17 @@ const registerUserSchema = Joi.object({
     .trim()
     .empty()
     .email()
-    .pattern(regexpList.email)
+    .pattern(authValidateList.emailRegExp)
     .required(),
-  password: Joi.string().min(userParamsList.passwordMinLength).required(),
+  password: Joi.string().min(authValidateList.passwordMinLength).required(),
 }).messages(validateErrorMessageList);
 
 /**
  * Joi schema for validating the request body when logging in a user.
  */
 const loginUserSchema = Joi.object({
-  email: Joi.string()
-    .trim()
-    .empty()
-    .email()
-    .pattern(regexpList.email)
-    .required(),
-  password: Joi.string().min(userParamsList.passwordMinLength).required(),
+  email: registerUserSchema.extract('email'),
+  password: registerUserSchema.extract('password'),
 }).messages(validateErrorMessageList);
 
 /**
@@ -65,7 +60,7 @@ const updateUserParamsSchema = Joi.object({
  * Joi schema for validating the request body when updating in a userName.
  */
 const updateUserNameSchema = Joi.object({
-  name: Joi.string().trim().empty().required(),
+  name: registerUserSchema.extract('name'),
 }).messages(validateErrorMessageList);
 
 module.exports = {
