@@ -26,6 +26,11 @@ const exercisesSchema = new Schema(
       default: null,
       required: true,
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'users',
+      required: true,
+    },
   },
   { versionKey: false }
 );

@@ -26,6 +26,11 @@ const productSchema = new Schema(
       default: '',
       required: true,
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'users',
+      required: true,
+    },
   },
   { versionKey: false }
 );
