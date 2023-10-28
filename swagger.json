@@ -170,7 +170,7 @@
       "UsersParamsRequest": {
         "$ref": "#/components/schemas/UserParams"
       },
-      "DiaryProductRequest": {
+      "DiaryProductsRequest": {
         "type": "object",
         "required": ["product_ID", "date", "amount", "calories"],
         "properties": {
@@ -188,7 +188,7 @@
           }
         }
       },
-      "DiaryExerciseRequest": {
+      "DiaryExercisesRequest": {
         "type": "object",
         "required": ["exercise_ID", "date", "amount", "calories"],
         "properties": {
@@ -275,6 +275,7 @@
           }
         }
       },
+
       "Statistic": {
         "type": "object",
         "properties": {
@@ -346,7 +347,117 @@
           }
         }
       },
-      "DiaryProductResponse": {
+      "ProductsResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "weight": {
+              "type": "number"
+            },
+            "calories": {
+              "type": "number"
+            },
+            "category": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "groupBloodNotAllowed": {
+              "type": "object",
+              "properties": {
+                "1": {
+                  "type": "boolean"
+                },
+                "2": {
+                  "type": "boolean"
+                },
+                "3": {
+                  "type": "boolean"
+                },
+                "4": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ProductsCategoriesResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "productsCategories": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ExercisesResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "bodyPart": {
+              "type": "string"
+            },
+            "equipment": {
+              "type": "string"
+            },
+            "gifUrl": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "target": {
+              "type": "string"
+            },
+            "burnedCalories": {
+              "type": "number"
+            },
+            "time": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "ExercisesSubcategoriesResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "filter": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "imgURL": {
+              "type": "string"
+            }
+          }
+        }
+      },
+
+      "DiaryProductsResponse": {
         "type": "object",
         "properties": {
           "user": {
@@ -371,7 +482,7 @@
           }
         }
       },
-      "DiaryExerciseResponse": {
+      "DiaryExercisesResponse": {
         "type": "object",
         "properties": {
           "user": {
@@ -851,48 +962,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "weight": {
-                        "type": "number"
-                      },
-                      "calories": {
-                        "type": "number"
-                      },
-                      "category": {
-                        "type": "string"
-                      },
-                      "title": {
-                        "type": "string"
-                      },
-                      "groupBloodNotAllowed": {
-                        "type": "object",
-                        "properties": {
-                          "1": {
-                            "type": "boolean"
-                          },
-                          "2": {
-                            "type": "boolean"
-                          },
-                          "3": {
-                            "type": "boolean"
-                          },
-                          "4": {
-                            "type": "boolean"
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/ProductsResponse"
                 }
               }
             }
           },
+
           "401": {
             "description": "Authorization error",
             "content": {
@@ -942,21 +1017,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "_id": {
-                        "type": "string"
-                      },
-                      "productsCategories": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/ProductsCategoriesResponse"
                 }
               }
             }
@@ -1122,50 +1183,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "exercises": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "bodyPart": {
-                            "type": "string"
-                          },
-                          "equipment": {
-                            "type": "string"
-                          },
-                          "gifUrl": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "target": {
-                            "type": "string"
-                          },
-                          "burnedCalories": {
-                            "type": "number"
-                          },
-                          "time": {
-                            "type": "number"
-                          }
-                        }
-                      }
-                    },
-                    "total": {
-                      "type": "integer"
-                    },
-                    "page": {
-                      "type": "integer"
-                    },
-                    "pageSize": {
-                      "type": "integer"
-                    }
-                  }
+                  "$ref": "#/components/schemas/ExercisesResponse"
                 }
               }
             }
@@ -1231,24 +1249,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "_id": {
-                        "type": "string"
-                      },
-                      "filter": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "imgURL": {
-                        "type": "string"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/ExercisesSubcategoriesResponse"
                 }
               }
             }
@@ -1378,7 +1379,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DiaryProductResponse"
+                  "$ref": "#/components/schemas/DiaryProductsResponse"
                 }
               }
             }
@@ -1458,7 +1459,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DiaryExerciseResponse"
+                  "$ref": "#/components/schemas/DiaryExercisesResponse"
                 }
               }
             }
@@ -1528,7 +1529,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DiaryProductRequest"
+                "$ref": "#/components/schemas/DiaryProductsRequest"
               }
             }
           }
@@ -1539,7 +1540,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DiaryProductResponse"
+                  "$ref": "#/components/schemas/DiaryProductsResponse"
                 }
               }
             }
@@ -1598,7 +1599,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DiaryExerciseRequest"
+                "$ref": "#/components/schemas/DiaryExercisesRequest"
               }
             }
           }
@@ -1609,7 +1610,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DiaryExerciseResponse"
+                  "$ref": "#/components/schemas/DiaryExercisesResponse"
                 }
               }
             }
