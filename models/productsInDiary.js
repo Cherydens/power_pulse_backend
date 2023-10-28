@@ -30,6 +30,7 @@ const productSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'users',
       required: true,
+      select: false,
     },
   },
   { versionKey: false }
