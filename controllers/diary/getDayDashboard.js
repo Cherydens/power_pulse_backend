@@ -6,8 +6,14 @@ const { controllerWrapper } = require('../../utils/index');
 const getDayDashboard = controllerWrapper(async (req, res) => {
   const { date } = req.query;
   const { _id } = req.user;
-  const productResult = await Products.find({ date: date, owner: _id });
-  const exercisestResult = await Exercises.find({ date: date, owner: _id });
+  const productResult = await Products.find(
+    { date: date, owner: _id },
+    { owner: false }
+  );
+  const exercisestResult = await Exercises.find(
+    { date: date, owner: _id },
+    { owner: false }
+  );
   const result = { productResult, exercisestResult };
   //  Response with the object of exercises
   res.status(200).json(result);
