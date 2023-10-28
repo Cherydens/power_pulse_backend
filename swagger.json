@@ -170,7 +170,7 @@
       "UsersParamsRequest": {
         "$ref": "#/components/schemas/UserParams"
       },
-      "DiaryProductsRequest": {
+      "DiaryProductRequest": {
         "type": "object",
         "required": ["product_ID", "date", "amount", "calories"],
         "properties": {
@@ -188,7 +188,7 @@
           }
         }
       },
-      "DiaryExesicesRequest": {
+      "DiaryExerciseRequest": {
         "type": "object",
         "required": ["exercise_ID", "date", "amount", "calories"],
         "properties": {
@@ -295,7 +295,7 @@
           }
         }
       },
-      "DiaryDayResponce": {
+      "DiaryDayResponse": {
         "type": "object",
         "properties": {
           "productResult": {
@@ -346,7 +346,7 @@
           }
         }
       },
-      "DiaryProductResponce": {
+      "DiaryProductResponse": {
         "type": "object",
         "properties": {
           "user": {
@@ -371,7 +371,7 @@
           }
         }
       },
-      "DiaryExerciseResponce": {
+      "DiaryExerciseResponse": {
         "type": "object",
         "properties": {
           "user": {
@@ -1313,7 +1313,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DiaryDayResponce"
+                  "$ref": "#/components/schemas/DiaryDayResponse"
                 }
               }
             }
@@ -1378,7 +1378,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DiaryProductResponce"
+                  "$ref": "#/components/schemas/DiaryProductResponse"
                 }
               }
             }
@@ -1458,7 +1458,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DiaryExerciseResponce"
+                  "$ref": "#/components/schemas/DiaryExerciseResponse"
                 }
               }
             }
@@ -1528,7 +1528,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DiaryProductsRequest"
+                "$ref": "#/components/schemas/DiaryProductRequest"
               }
             }
           }
@@ -1539,7 +1539,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DiaryProductResponce"
+                  "$ref": "#/components/schemas/DiaryProductResponse"
                 }
               }
             }
@@ -1598,7 +1598,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DiaryExesicesRequest"
+                "$ref": "#/components/schemas/DiaryExerciseRequest"
               }
             }
           }
@@ -1609,7 +1609,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DiaryExerciseResponce"
+                  "$ref": "#/components/schemas/DiaryExerciseResponse"
                 }
               }
             }
