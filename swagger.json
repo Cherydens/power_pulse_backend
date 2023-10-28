@@ -321,7 +321,7 @@
               }
             }
           },
-          "exercisestResult": {
+          "exerciseResult": {
             "type": "object",
             "items": {
               "type": "object",
