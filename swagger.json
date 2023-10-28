@@ -1351,7 +1351,7 @@
         }
       }
     },
-    "/api/diary/day/diaryProducts/:productId": {
+    "/api/diary/day/diaryProducts/{productId}": {
       "delete": {
         "tags": ["Diary"],
         "summary": "Delet product in diary by id",
@@ -1431,7 +1431,7 @@
         }
       }
     },
-    "/api/diary/day/diaryExercises/:exerciseId": {
+    "/api/diary/day/diaryExercises/{exerciseId}": {
       "delete": {
         "tags": ["Diary"],
         "summary": "Delet exercise in diary by id",
