@@ -6,8 +6,8 @@ const deleteExercise = controllerWrapper(async (req, res) => {
   const { exerciseId } = req.params;
   const { _id } = req.user;
 
-  const exercisestResult = await Exercises.find({ exerciseId, owner: _id });
-  if (exercisestResult.length === 0) {
+  const exerciseResult = await Exercises.find({ exerciseId, owner: _id });
+  if (exerciseResult.length === 0) {
     throw new HttpError(404, 'Not found');
   }
 
