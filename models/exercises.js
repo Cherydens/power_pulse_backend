@@ -1,13 +1,9 @@
-const { Schema, model, isObjectIdOrHexString } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const { handleMongooseError } = require('../utils');
-const { string } = require('joi');
 
 const exercisesSchema = new Schema(
   {
-    _id: {
-      type: Schema.Types.ObjectId,
-    },
     bodyPart: {
       type: String,
     },
