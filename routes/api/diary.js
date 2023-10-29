@@ -14,17 +14,20 @@ const diaryValidationSchemas = require('../../utils/validation/diaryValidationSc
 
 const router = express.Router();
 
-// Route for getting user's exercises and products by date (GET /current):
+// Route for getting user's exercises and products by date (GET /day):
 router.route('/day').get(authenticate, getDayDashboard);
 
+// Route for deleting product in diary by id (DELETE /day/diaryProducts/:productId):
 router
   .route('/day/diaryProducts/:productId')
   .delete(authenticate, deleteProduct);
 
+// Route for deleting exercise in diary by id (DELETE /day/diaryExercises/:exerciseId):
 router
   .route('/day/diaryExercises/:exerciseId')
   .delete(authenticate, deleteExercise);
 
+// Route for adding product in diary (POST /day/diaryProducts):
 router
   .route('/day/diaryProducts')
   .post(
@@ -33,6 +36,7 @@ router
     addProductInDiary
   );
 
+// Route for adding exercise in diary (POST /day/diaryExercises):
 router
   .route('/day/diaryExercises')
   .post(
