@@ -288,7 +288,7 @@
           "usersTotalQuantity": {
             "type": "number"
           },
-          "timeTotalQuantity": {
+          "minutesTotalQuantity": {
             "type": "number"
           },
           "exerciseDoneTotalQuantity": {

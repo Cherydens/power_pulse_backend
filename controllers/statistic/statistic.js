@@ -15,7 +15,7 @@ const getStatistic = controllerWrapper(async (req, res) => {
     return acc + exercise.calories;
   }, 0);
 
-  const timeTotalQuantity = allDiaryExercises.reduce((acc, exercise) => {
+  const minutesTotalQuantity = allDiaryExercises.reduce((acc, exercise) => {
     return acc + exercise.time;
   }, 0);
 
@@ -27,7 +27,7 @@ const getStatistic = controllerWrapper(async (req, res) => {
     exerciseTotalQuantity,
     caloriesTotalQuantity,
     usersTotalQuantity,
-    timeTotalQuantity,
+    minutesTotalQuantity,
     exerciseDoneTotalQuantity,
   };
 
