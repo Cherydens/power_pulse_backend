@@ -12,27 +12,33 @@ const {
 
 const diaryValidationSchemas = require('../../utils/validation/diaryValidationSchemas');
 
-// An Express router object is created:
 const router = express.Router();
 
-router.get('/day', authenticate, getDayDashboard);
+// Route for getting user's exercises and products by date (GET /current):
+router.route('/day').get(authenticate, getDayDashboard);
 
-router.delete('/day/diaryProducts/:productId', authenticate, deleteProduct);
+router
+  .route('/day/diaryProducts/:productId')
+  .delete(authenticate, deleteProduct);
 
-router.delete('/day/diaryExercises/:exerciseId', authenticate, deleteExercise);
+router
+  .route('/day/diaryExercises/:exerciseId')
+  .delete(authenticate, deleteExercise);
 
-router.post(
-  '/day/diaryProducts',
-  authenticate,
-  validateBody(diaryValidationSchemas.productSchema),
-  addProductInDiary
-);
+router
+  .route('/day/diaryProducts')
+  .post(
+    authenticate,
+    validateBody(diaryValidationSchemas.productSchema),
+    addProductInDiary
+  );
 
-router.post(
-  '/day/diaryExercises',
-  authenticate,
-  validateBody(diaryValidationSchemas.exerciseSchema),
-  addExerciseInDiary
-);
+router
+  .route('/day/diaryExercises')
+  .post(
+    authenticate,
+    validateBody(diaryValidationSchemas.exerciseSchema),
+    addExerciseInDiary
+  );
 
 module.exports = router;
