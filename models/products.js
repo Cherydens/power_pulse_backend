@@ -25,6 +25,9 @@ const notAllowedSchema = new Schema(
 
 const productsSchema = new Schema(
   {
+    _id: {
+      type: Schema.Types.ObjectId,
+    },
     title: {
       type: String,
     },

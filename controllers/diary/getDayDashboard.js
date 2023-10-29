@@ -22,6 +22,7 @@ const getDayDashboard = controllerWrapper(async (req, res) => {
       productDay.map(async product => {
         const { title, category, groupBloodNotAllowed } =
           await Products.findById(product.product_ID).lean();
+
         return { ...product, title, category, groupBloodNotAllowed };
       })
     ),

@@ -4,6 +4,9 @@ const { handleMongooseError } = require('../utils');
 
 const exercisesSchema = new Schema(
   {
+    _id: {
+      type: Schema.Types.ObjectId,
+    },
     bodyPart: {
       type: String,
     },
