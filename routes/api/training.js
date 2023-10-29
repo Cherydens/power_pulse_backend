@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.get('/exercises', authenticate, controllers.getAllExercises);
 
+router.get('/exercises/:exerciseId', authenticate, controllers.getExerciseById);
+
 router.get(
   '/subcategories',
   authenticate,

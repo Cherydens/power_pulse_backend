@@ -288,7 +288,7 @@
           "usersTotalQuantity": {
             "type": "number"
           },
-          "timeTotalQuantity": {
+          "minutesTotalQuantity": {
             "type": "number"
           },
           "exerciseDoneTotalQuantity": {
@@ -342,6 +342,43 @@
                 "calories": {
                   "type": "integer"
                 }
+              }
+            }
+          }
+        }
+      },
+      "ProductByIdResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "number"
+          },
+          "calories": {
+            "type": "number"
+          },
+          "category": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "groupBloodNotAllowed": {
+            "type": "object",
+            "properties": {
+              "1": {
+                "type": "boolean"
+              },
+              "2": {
+                "type": "boolean"
+              },
+              "3": {
+                "type": "boolean"
+              },
+              "4": {
+                "type": "boolean"
               }
             }
           }
@@ -401,6 +438,35 @@
                 "type": "string"
               }
             }
+          }
+        }
+      },
+      "ExerciseByIdResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "bodyPart": {
+            "type": "string"
+          },
+          "equipment": {
+            "type": "string"
+          },
+          "gifUrl": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "burnedCalories": {
+            "type": "number"
+          },
+          "time": {
+            "type": "number"
           }
         }
       },
@@ -1001,6 +1067,72 @@
         }
       }
     },
+    "/api/products/{productId}": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Return product byId",
+        "operationId": "getProductById",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "Choose product by id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductByIdResponse"
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/products/categories": {
       "get": {
         "tags": ["Products"],
@@ -1188,6 +1320,72 @@
               }
             }
           },
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/training/exercises/{exerciseId}": {
+      "get": {
+        "tags": ["Training"],
+        "summary": "Return exercise by Id",
+        "operationId": "getExerciseById",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "exerciseId",
+            "in": "path",
+            "description": "Choose exercise by id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExerciseByIdResponse"
+                }
+              }
+            }
+          },
+
           "401": {
             "description": "Authorization error",
             "content": {
