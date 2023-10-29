@@ -316,8 +316,28 @@
                 "amount": {
                   "type": "integer"
                 },
-                "calories": {
+                "title": {
                   "type": "integer"
+                },
+                "category": {
+                  "type": "string"
+                },
+                "groupBloodNotAllowed": {
+                  "type": "object",
+                  "properties": {
+                    "1": {
+                      "type": "boolean"
+                    },
+                    "2": {
+                      "type": "boolean"
+                    },
+                    "3": {
+                      "type": "boolean"
+                    },
+                    "4": {
+                      "type": "boolean"
+                    }
+                  }
                 }
               }
             }
@@ -341,6 +361,18 @@
                 },
                 "calories": {
                   "type": "integer"
+                },
+                "bodyPart": {
+                  "type": "string"
+                },
+                "equipment": {
+                  "type": "string"
+                },
+                "target": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
                 }
               }
             }
