@@ -2,18 +2,22 @@ const ProductsDiary = require('../../models/productsInDiary');
 const ExercisesDiary = require('../../models/exercisesInDiary');
 const Exercises = require('../../models/exercises');
 const Products = require('../../models/products');
+const { format } = require('date-fns');
 const { controllerWrapper } = require('../../utils/index');
 
 // Контролер отримання вправ та продуктів що містяться в щоденнику користувача за визначену дату
 const getDayDashboard = controllerWrapper(async (req, res) => {
   const { date } = req.query;
   const { _id } = req.user;
+
+  const validDate = format(new Date(date), 'yyyy-MM-dd');
+
   const productDay = await ProductsDiary.find({
-    date: date,
+    date: validDate,
     owner: _id,
   }).lean();
   const exerciseDay = await ExercisesDiary.find({
-    date: date,
+    date: validDate,
     owner: _id,
   }).lean();
 
