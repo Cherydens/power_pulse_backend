@@ -7,19 +7,17 @@ const { controllerWrapper } = require('../../utils/index');
 
 // Контролер отримання вправ та продуктів що містяться в щоденнику користувача за визначену дату
 const getDayDashboard = controllerWrapper(async (req, res) => {
-  const { date } = req.query;
-  const { _id } = req.user;
+  const { date = null } = req.query;
+  const { _id: owner } = req.user;
 
-  const validDate = format(new Date(date), 'yyyy-MM-dd');
+  const baseQuery = { owner };
 
-  const productDay = await ProductsDiary.find({
-    date: validDate,
-    owner: _id,
-  }).lean();
-  const exerciseDay = await ExercisesDiary.find({
-    date: validDate,
-    owner: _id,
-  }).lean();
+  if (date) {
+    baseQuery.date = format(new Date(date), 'yyyy-MM-dd');
+  }
+
+  const productDay = await ProductsDiary.find(baseQuery).lean();
+  const exerciseDay = await ExercisesDiary.find(baseQuery).lean();
 
   const [productResult, exerciseResult] = await Promise.all([
     Promise.all(
