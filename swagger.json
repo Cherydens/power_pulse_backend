@@ -380,42 +380,56 @@
         }
       },
       "ProductsResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "weight": {
-              "type": "number"
-            },
-            "calories": {
-              "type": "number"
-            },
-            "category": {
-              "type": "string"
-            },
-            "title": {
-              "type": "string"
-            },
-            "groupBloodNotAllowed": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
               "type": "object",
               "properties": {
-                "1": {
-                  "type": "boolean"
+                "id": {
+                  "type": "string"
                 },
-                "2": {
-                  "type": "boolean"
+                "weight": {
+                  "type": "number"
                 },
-                "3": {
-                  "type": "boolean"
+                "calories": {
+                  "type": "number"
                 },
-                "4": {
-                  "type": "boolean"
+                "category": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "groupBloodNotAllowed": {
+                  "type": "object",
+                  "properties": {
+                    "1": {
+                      "type": "boolean"
+                    },
+                    "2": {
+                      "type": "boolean"
+                    },
+                    "3": {
+                      "type": "boolean"
+                    },
+                    "4": {
+                      "type": "boolean"
+                    }
+                  }
                 }
               }
             }
+          },
+          "page": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "integer"
+          },
+          "total": {
+            "type": "integer"
           }
         }
       },
@@ -437,34 +451,48 @@
         }
       },
       "ExercisesResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "bodyPart": {
-              "type": "string"
-            },
-            "equipment": {
-              "type": "string"
-            },
-            "gifUrl": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "target": {
-              "type": "string"
-            },
-            "burnedCalories": {
-              "type": "number"
-            },
-            "time": {
-              "type": "number"
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "bodyPart": {
+                  "type": "string"
+                },
+                "equipment": {
+                  "type": "string"
+                },
+                "gifUrl": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "target": {
+                  "type": "string"
+                },
+                "burnedCalories": {
+                  "type": "number"
+                },
+                "time": {
+                  "type": "number"
+                }
+              }
             }
+          },
+          "page": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "integer"
+          },
+          "total": {
+            "type": "integer"
           }
         }
       },
