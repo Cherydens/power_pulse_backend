@@ -5,11 +5,9 @@ const DiaryExercises = require('../../models/exercisesInDiary');
 const { controllerWrapper } = require('../../utils');
 
 const getStatistic = controllerWrapper(async (req, res) => {
-  const allExercises = await Exercises.find();
+  const exerciseTotalQuantity = await Exercises.countDocuments();
   const allDiaryExercises = await DiaryExercises.find();
-  const allUsers = await User.find();
-
-  const exerciseTotalQuantity = allExercises.length;
+  const usersTotalQuantity = await User.countDocuments();
 
   const caloriesTotalQuantity = allDiaryExercises.reduce((acc, exercise) => {
     return acc + exercise.calories;
@@ -18,8 +16,6 @@ const getStatistic = controllerWrapper(async (req, res) => {
   const minutesTotalQuantity = allDiaryExercises.reduce((acc, exercise) => {
     return acc + exercise.time;
   }, 0);
-
-  const usersTotalQuantity = allUsers.length;
 
   const exerciseDoneTotalQuantity = allDiaryExercises.length;
 

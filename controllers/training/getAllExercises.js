@@ -14,15 +14,15 @@ const getAllExercises = controllerWrapper(async (req, res) => {
   const baseQuery = {};
 
   if (bodyPart) {
-    baseQuery.bodyPart = { $regex: bodyPart, $options: 'i' };
+    baseQuery.bodyPart = { $regex: bodyPart.trim(), $options: 'i' };
   }
 
   if (equipment) {
-    baseQuery.equipment = { $regex: equipment, $options: 'i' };
+    baseQuery.equipment = { $regex: equipment.trim(), $options: 'i' };
   }
 
   if (target) {
-    baseQuery.target = { $regex: target, $options: 'i' };
+    baseQuery.target = { $regex: target.trim(), $options: 'i' };
   }
 
   const data = await Exercises.find(baseQuery).skip(skip).limit(limit);
