@@ -299,7 +299,7 @@
         "type": "object",
         "properties": {
           "productResult": {
-            "type": "object",
+            "type": "array",
             "items": {
               "type": "object",
               "properties": {
@@ -342,7 +342,7 @@
             }
           },
           "exerciseResult": {
-            "type": "object",
+            "type": "array",
             "items": {
               "type": "object",
               "properties": {
