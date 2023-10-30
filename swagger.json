@@ -7,11 +7,11 @@
   },
   "servers": [
     {
-      "url": "https://power-pulse-api.onrender.com",
+      "url": "https://power-pulse-api.onrender.com/api",
       "description": "Server on render.com"
     },
     {
-      "url": "http://localhost:3000",
+      "url": "http://localhost:3000/api",
       "description": "Local server"
     }
   ],
@@ -380,42 +380,56 @@
         }
       },
       "ProductsResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "weight": {
-              "type": "number"
-            },
-            "calories": {
-              "type": "number"
-            },
-            "category": {
-              "type": "string"
-            },
-            "title": {
-              "type": "string"
-            },
-            "groupBloodNotAllowed": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
               "type": "object",
               "properties": {
-                "1": {
-                  "type": "boolean"
+                "id": {
+                  "type": "string"
                 },
-                "2": {
-                  "type": "boolean"
+                "weight": {
+                  "type": "number"
                 },
-                "3": {
-                  "type": "boolean"
+                "calories": {
+                  "type": "number"
                 },
-                "4": {
-                  "type": "boolean"
+                "category": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "groupBloodNotAllowed": {
+                  "type": "object",
+                  "properties": {
+                    "1": {
+                      "type": "boolean"
+                    },
+                    "2": {
+                      "type": "boolean"
+                    },
+                    "3": {
+                      "type": "boolean"
+                    },
+                    "4": {
+                      "type": "boolean"
+                    }
+                  }
                 }
               }
             }
+          },
+          "page": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "integer"
+          },
+          "total": {
+            "type": "integer"
           }
         }
       },
@@ -437,34 +451,48 @@
         }
       },
       "ExercisesResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "bodyPart": {
-              "type": "string"
-            },
-            "equipment": {
-              "type": "string"
-            },
-            "gifUrl": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "target": {
-              "type": "string"
-            },
-            "burnedCalories": {
-              "type": "number"
-            },
-            "time": {
-              "type": "number"
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "bodyPart": {
+                  "type": "string"
+                },
+                "equipment": {
+                  "type": "string"
+                },
+                "gifUrl": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "target": {
+                  "type": "string"
+                },
+                "burnedCalories": {
+                  "type": "number"
+                },
+                "time": {
+                  "type": "number"
+                }
+              }
             }
+          },
+          "page": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "integer"
+          },
+          "total": {
+            "type": "integer"
           }
         }
       },
@@ -573,7 +601,7 @@
   ],
 
   "paths": {
-    "/api/users/google": {
+    "/users/google": {
       "get": {
         "tags": ["Users"],
         "summary": "Get Google's auth URL",
@@ -600,7 +628,7 @@
         }
       }
     },
-    "/api/users/register": {
+    "/users/register": {
       "post": {
         "tags": ["Users"],
         "summary": "User's registration",
@@ -639,7 +667,7 @@
         }
       }
     },
-    "/api/users/login": {
+    "/users/login": {
       "post": {
         "tags": ["Users"],
         "summary": "User's log in",
@@ -678,7 +706,7 @@
         }
       }
     },
-    "/api/users/current": {
+    "/users/current": {
       "get": {
         "tags": ["Users"],
         "summary": "Get current user's information",
@@ -703,7 +731,7 @@
         }
       }
     },
-    "/api/users/logout": {
+    "/users/logout": {
       "post": {
         "tags": ["Users"],
         "summary": "Log out user",
@@ -721,7 +749,7 @@
         }
       }
     },
-    "/api/users/params": {
+    "/users/params": {
       "post": {
         "tags": ["Users"],
         "summary": "Add user's params",
@@ -822,7 +850,7 @@
         }
       }
     },
-    "/api/users/username": {
+    "/users/username": {
       "patch": {
         "tags": ["Users"],
         "summary": "Update user's name ",
@@ -862,7 +890,7 @@
         }
       }
     },
-    "/api/users/avatars": {
+    "/users/avatars": {
       "patch": {
         "tags": ["Users"],
         "summary": "Update user's avatar",
@@ -908,7 +936,7 @@
         }
       }
     },
-    "/api/products": {
+    "/products": {
       "get": {
         "tags": ["Products"],
         "summary": "Return all products",
@@ -1033,7 +1061,7 @@
         }
       }
     },
-    "/api/products/categories": {
+    "/products/categories": {
       "get": {
         "tags": ["Products"],
         "summary": "Return all products categories",
@@ -1087,7 +1115,7 @@
         }
       }
     },
-    "/api/training/exercises": {
+    "/training/exercises": {
       "get": {
         "tags": ["Training"],
         "summary": "Return all exercises",
@@ -1253,7 +1281,7 @@
         }
       }
     },
-    "/api/training/subcategories/": {
+    "/training/subcategories/": {
       "get": {
         "tags": ["Training"],
         "summary": "Return all exercise subcategories",
@@ -1319,7 +1347,7 @@
         }
       }
     },
-    "/api/diary/day": {
+    "/diary/day": {
       "get": {
         "tags": ["Diary"],
         "summary": "Return all exercises and products which user add in diary by date",
@@ -1384,7 +1412,7 @@
         }
       }
     },
-    "/api/diary/day/diaryProducts/{productId}": {
+    "/diary/day/diaryProducts/{productId}": {
       "delete": {
         "tags": ["Diary"],
         "summary": "Delete product in diary by id",
@@ -1464,7 +1492,7 @@
         }
       }
     },
-    "/api/diary/day/diaryExercises/{exerciseId}": {
+    "/diary/day/diaryExercises/{exerciseId}": {
       "delete": {
         "tags": ["Diary"],
         "summary": "Delete exercise in diary by id",
@@ -1544,7 +1572,7 @@
         }
       }
     },
-    "/api/diary/day/diaryProducts": {
+    "/diary/day/diaryProducts": {
       "post": {
         "tags": ["Diary"],
         "summary": "Add product in diary",
@@ -1614,7 +1642,7 @@
         }
       }
     },
-    "/api/diary/day/diaryExercises": {
+    "/diary/day/diaryExercises": {
       "post": {
         "tags": ["Diary"],
         "summary": "Add exercise in diary",
@@ -1684,7 +1712,7 @@
         }
       }
     },
-    "/api/statistic": {
+    "/statistic": {
       "get": {
         "tags": ["Statistic"],
         "summary": "Get statistic information",

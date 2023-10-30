@@ -3,9 +3,9 @@ const { controllerWrapper, HttpError } = require('../../utils');
 
 const getAllProducts = controllerWrapper(async (req, res) => {
   const {
-    title = '',
-    recommended,
-    category = '',
+    title = null,
+    recommended = null,
+    category = null,
     page = 1,
     limit = 18,
   } = req.query;
@@ -18,47 +18,26 @@ const getAllProducts = controllerWrapper(async (req, res) => {
 
   const { blood } = userParams;
 
-  if (recommended) {
-    switch (recommended) {
-      case 'true':
-        const recommendedProducts = await Products.find(
-          {
-            title: { $regex: title, $options: 'i' },
-            category: { $regex: category, $options: 'i' },
-            [`groupBloodNotAllowed.${blood}`]: 'false',
-          },
-          {},
-          { skip, limit }
-        );
-        res.status(200).json(recommendedProducts);
-        return;
-      case 'false':
-        const notRecommendedProducts = await Products.find(
-          {
-            title: { $regex: title, $options: 'i' },
-            category: { $regex: category, $options: 'i' },
-            [`groupBloodNotAllowed.${blood}`]: 'true',
-          },
-          {},
-          { skip, limit }
-        );
-        res.status(200).json(notRecommendedProducts);
-        return;
-      default:
-        return;
-    }
+  const baseQuery = {};
+
+  if (title) {
+    baseQuery.title = { $regex: title, $options: 'i' };
   }
 
-  const result = await Products.find(
-    {
-      title: { $regex: title, $options: 'i' },
-      category: { $regex: category, $options: 'i' },
-    },
-    {},
-    { skip, limit }
-  );
+  if (category) {
+    baseQuery.category = { $regex: category, $options: 'i' };
+  }
 
-  res.status(200).json(result);
+  if (recommended) {
+    baseQuery[`groupBloodNotAllowed.${blood}`] =
+      recommended === 'true' ? 'false' : 'true';
+  }
+
+  const data = await Products.find(baseQuery).skip(skip).limit(limit);
+
+  const total = await Products.countDocuments(baseQuery);
+
+  res.status(200).json({ data, page: +page, limit: +limit, total });
 });
 
 module.exports = getAllProducts;

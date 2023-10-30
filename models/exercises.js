@@ -2,6 +2,9 @@ const { Schema, model } = require('mongoose');
 
 const { handleMongooseError } = require('../utils');
 
+/**
+ * Schema for the Exercises model.
+ */
 const exercisesSchema = new Schema(
   {
     bodyPart: {
