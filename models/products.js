@@ -2,6 +2,9 @@ const { Schema, model } = require('mongoose');
 
 const { handleMongooseError } = require('../utils');
 
+/**
+ * Schema for Not Allowed Products model.
+ */
 const notAllowedSchema = new Schema(
   {
     1: {
@@ -23,6 +26,9 @@ const notAllowedSchema = new Schema(
   { versionKey: false, _id: false }
 );
 
+/**
+ * Schema for the Products model.
+ */
 const productsSchema = new Schema(
   {
     title: {
