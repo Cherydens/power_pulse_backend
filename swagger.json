@@ -1419,7 +1419,7 @@
             "name": "date",
             "in": "query",
             "description": "Choose exercises and product by date",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             }
