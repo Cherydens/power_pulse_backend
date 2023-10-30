@@ -4,8 +4,12 @@ const controllers = require('../../controllers/products/index');
 
 const router = express.Router();
 
-router.get('/', authenticate, controllers.getAllProducts);
+// Route for getting all products (GET /):
+router.route('/').get(authenticate, controllers.getAllProducts);
 
-router.get('/categories', authenticate, controllers.getProductsCategories);
+// Route for getting all products categories (GET /categories):
+router
+  .route('/categories')
+  .get(authenticate, controllers.getProductsCategories);
 
 module.exports = router;

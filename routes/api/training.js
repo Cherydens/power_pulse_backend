@@ -4,12 +4,13 @@ const controllers = require('../../controllers/training/index');
 
 const router = express.Router();
 
-router.get('/exercises', authenticate, controllers.getAllExercises);
+// Route for getting all exercises (GET /exercises):
+router.route('/exercises').get(authenticate, controllers.getAllExercises);
 
-router.get(
-  '/subcategories',
-  authenticate,
-  controllers.getExerciseSubCategories
-);
+// Route for getting all exercises subcategories (GET /subcategories):
+router
+  .route('/subcategories')
+  .get(authenticate, controllers.getExerciseSubCategories);
 
 module.exports = router;
+
