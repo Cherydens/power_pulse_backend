@@ -11,25 +11,24 @@ const getAllProducts = controllerWrapper(async (req, res) => {
   } = req.query;
   const skip = (page - 1) * limit;
 
-  const { userParams } = req.user;
-  if (!userParams) {
-    throw new HttpError(400, 'You must choose your user params');
-  }
-
-  const { blood } = userParams;
-
   const baseQuery = {};
 
   if (title) {
-    baseQuery.title = { $regex: title, $options: 'i' };
+    baseQuery.title = { $regex: title.trim(), $options: 'i' };
   }
 
   if (category) {
-    baseQuery.category = { $regex: category, $options: 'i' };
+    baseQuery.category = { $regex: category.trim(), $options: 'i' };
   }
 
   if (recommended) {
-    baseQuery[`groupBloodNotAllowed.${blood}`] =
+    const { userParams } = req.user;
+
+    if (!userParams) {
+      throw new HttpError(400, 'You must choose your user params');
+    }
+
+    baseQuery[`groupBloodNotAllowed.${userParams.blood}`] =
       recommended === 'true' ? 'false' : 'true';
   }
 
