@@ -4,7 +4,7 @@ const { handleMongooseError } = require('../utils');
 /**
  * Schema for the User model.
  */
-const exercisesSchema = new Schema(
+const exerciseDiarySchema = new Schema(
   {
     exercise_ID: {
       type: String,
@@ -36,11 +36,11 @@ const exercisesSchema = new Schema(
 );
 
 // Handle Mongoose save errors using a post middleware
-exercisesSchema.post('save', handleMongooseError);
+exerciseDiarySchema.post('save', handleMongooseError);
 
 /**
  * Mongoose model for the 'exercise' collection using the userSchema.
  */
-const Exercises = model('exerciseDiary', exercisesSchema);
+const ExercisesDiary = model('exerciseDiary', exerciseDiarySchema);
 
-module.exports = Exercises;
+module.exports = ExercisesDiary;

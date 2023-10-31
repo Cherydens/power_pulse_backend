@@ -5,7 +5,7 @@ const { handleMongooseError } = require('../utils');
 /**
  * Schema for the Product model.
  */
-const productSchema = new Schema(
+const productDiarySchema = new Schema(
   {
     product_ID: {
       type: String,
@@ -37,11 +37,11 @@ const productSchema = new Schema(
 );
 
 // Handle Mongoose save errors using a post middleware
-productSchema.post('save', handleMongooseError);
+productDiarySchema.post('save', handleMongooseError);
 
 /**
  * Mongoose model for the 'product' collection using the userSchema.
  */
-const Products = model('productDiary', productSchema);
+const ProductsDiary = model('productDiary', productDiarySchema);
 
-module.exports = Products;
+module.exports = ProductsDiary;

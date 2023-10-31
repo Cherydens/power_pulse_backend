@@ -1,4 +1,4 @@
-const Products = require('../../models/products');
+const { Products } = require('../../models');
 const { controllerWrapper, HttpError } = require('../../utils');
 
 const getAllProducts = controllerWrapper(async (req, res) => {
@@ -25,7 +25,10 @@ const getAllProducts = controllerWrapper(async (req, res) => {
     const { userParams } = req.user;
 
     if (!userParams) {
-      throw new HttpError(400, 'You must choose your user params');
+      throw new HttpError(
+        400,
+        'You must set your user params to get recommended products'
+      );
     }
 
     baseQuery[`groupBloodNotAllowed.${userParams.blood}`] =
