@@ -5,15 +5,20 @@ const { controllerWrapper } = require('../../utils/index');
 // Контролер додавання вправи що містяться в щоденнику користувача за визначену дату
 const addExerciseInDiary = controllerWrapper(async (req, res) => {
   const { _id: owner } = req.user;
+
   req.body.date = format(new Date(req.body.date), 'yyyy-MM-dd');
-  const exercise = await Exercises.create({ ...req.body, owner });
+
+  const { exercise_ID, date, time, calories, _id } = await Exercises.create({
+    ...req.body,
+    owner,
+  });
 
   res.status(201).json({
-    exercise_ID: exercise.exercise_ID,
-    date: exercise.date,
-    time: exercise.time,
-    calories: exercise.calories,
-    _id: exercise._id,
+    exercise_ID,
+    date,
+    time,
+    calories,
+    _id,
   });
 });
 

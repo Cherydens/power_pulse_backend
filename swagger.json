@@ -519,50 +519,40 @@
       "DiaryProductsResponse": {
         "type": "object",
         "properties": {
-          "user": {
-            "type": "object",
-            "properties": {
-              "_id": {
-                "type": "string"
-              },
-              "product_ID": {
-                "type": "string"
-              },
-              "date": {
-                "type": "string"
-              },
-              "amount": {
-                "type": "integer"
-              },
-              "calories": {
-                "type": "integer"
-              }
-            }
+          "_id": {
+            "type": "string"
+          },
+          "product_ID": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "integer"
+          },
+          "calories": {
+            "type": "integer"
           }
         }
       },
       "DiaryExercisesResponse": {
         "type": "object",
         "properties": {
-          "user": {
-            "type": "object",
-            "properties": {
-              "_id": {
-                "type": "string"
-              },
-              "exercise_ID": {
-                "type": "string"
-              },
-              "date": {
-                "type": "string"
-              },
-              "time": {
-                "type": "integer"
-              },
-              "calories": {
-                "type": "integer"
-              }
-            }
+          "_id": {
+            "type": "string"
+          },
+          "exercise_ID": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "time": {
+            "type": "integer"
+          },
+          "calories": {
+            "type": "integer"
           }
         }
       },
@@ -995,6 +985,9 @@
                     "format": "binary"
                   }
                 }
+              },
+              "encoding": {
+                "avatar": { "contentType": "image" }
               }
             }
           }
