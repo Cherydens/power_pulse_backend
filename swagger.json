@@ -1482,7 +1482,7 @@
         }
       }
     },
-    "/diary/day/diaryProducts/{productId}": {
+    "/diary/day/diaryProducts/{id}": {
       "delete": {
         "tags": ["Diary"],
         "summary": "Delete product in diary by id",
@@ -1494,7 +1494,7 @@
         ],
         "parameters": [
           {
-            "name": "productId",
+            "name": "id",
             "in": "path",
             "description": "Choose product by id",
             "required": true,
@@ -1547,7 +1547,7 @@
         }
       }
     },
-    "/diary/day/diaryExercises/{exerciseId}": {
+    "/diary/day/diaryExercises/{id}": {
       "delete": {
         "tags": ["Diary"],
         "summary": "Delete exercise in diary by id",
@@ -1559,7 +1559,7 @@
         ],
         "parameters": [
           {
-            "name": "exerciseId",
+            "name": "id",
             "in": "path",
             "description": "Choose exercise by id",
             "required": true,
