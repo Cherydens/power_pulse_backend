@@ -131,6 +131,11 @@
         "format": "Time",
         "example": "2023-10-22T18:43:34.175Z"
       },
+      "Date": {
+        "type": "string",
+        "example": "2023-10-31",
+        "format": "YYYY-MM-DD"
+      },
       "RegistrationRequest": {
         "type": "object",
         "required": ["name", "email", "password"],
@@ -178,7 +183,7 @@
             "type": "string"
           },
           "date": {
-            "type": "string"
+            "$ref": "#/components/schemas/Date"
           },
           "amount": {
             "type": "integer"
@@ -196,7 +201,7 @@
             "type": "string"
           },
           "date": {
-            "type": "string"
+            "$ref": "#/components/schemas/Date"
           },
           "time": {
             "type": "integer"
@@ -212,6 +217,28 @@
           "token": {
             "$ref": "#/components/schemas/Token"
           },
+          "user": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "$ref": "#/components/schemas/Name"
+              },
+              "email": {
+                "$ref": "#/components/schemas/Email"
+              },
+              "avatarUrls": {
+                "$ref": "#/components/schemas/AvatarUrls"
+              },
+              "createdAt": {
+                "$ref": "#/components/schemas/CreatedAt"
+              }
+            }
+          }
+        }
+      },
+      "GetCurrentResponse": {
+        "type": "object",
+        "properties": {
           "user": {
             "type": "object",
             "properties": {
@@ -310,7 +337,7 @@
                   "type": "string"
                 },
                 "date": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Date"
                 },
                 "amount": {
                   "type": "integer"
@@ -353,7 +380,7 @@
                   "type": "string"
                 },
                 "date": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Date"
                 },
                 "time": {
                   "type": "integer"
@@ -526,7 +553,7 @@
             "type": "string"
           },
           "date": {
-            "type": "string"
+            "$ref": "#/components/schemas/Date"
           },
           "amount": {
             "type": "integer"
@@ -546,7 +573,7 @@
             "type": "string"
           },
           "date": {
-            "type": "string"
+            "$ref": "#/components/schemas/Date"
           },
           "time": {
             "type": "integer"
@@ -740,7 +767,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AuthResponse"
+                  "$ref": "#/components/schemas/GetCurrentResponse"
                 }
               }
             }
@@ -1414,7 +1441,7 @@
             "description": "Choose exercises and product by date",
             "required": false,
             "schema": {
-              "type": "string"
+              "$ref": "#/components/schemas/Date"
             }
           }
         ],
