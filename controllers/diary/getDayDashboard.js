@@ -1,11 +1,6 @@
 const { format } = require('date-fns');
 const { controllerWrapper } = require('../../utils/index');
-const {
-  ProductsDiary,
-  ExercisesDiary,
-  Products,
-  Exercises,
-} = require('../../models');
+const { ProductsDiary, ExercisesDiary } = require('../../models');
 
 // Контролер отримання вправ та продуктів що містяться в щоденнику користувача за визначену дату
 const getDayDashboard = controllerWrapper(async (req, res) => {
@@ -13,32 +8,44 @@ const getDayDashboard = controllerWrapper(async (req, res) => {
   const { _id: owner } = req.user;
 
   const baseQuery = { owner };
+  date && (baseQuery.date = format(new Date(date), 'yyyy-MM-dd'));
 
-  if (date) {
-    baseQuery.date = format(new Date(date), 'yyyy-MM-dd');
-  }
+  const productDay = await ProductsDiary.find(baseQuery).populate(
+    'product_ID',
+    'title category groupBloodNotAllowed'
+  );
 
-  const productDay = await ProductsDiary.find(baseQuery).lean();
-  const exerciseDay = await ExercisesDiary.find(baseQuery).lean();
+  const exerciseDay = await ExercisesDiary.find(baseQuery).populate(
+    'exercise_ID',
+    'bodyPart equipment target name'
+  );
 
-  const [productResult, exerciseResult] = await Promise.all([
-    Promise.all(
-      productDay.map(async product => {
-        const { title, category, groupBloodNotAllowed } =
-          await Products.findById(product.product_ID).lean();
-        return { ...product, title, category, groupBloodNotAllowed };
-      })
-    ),
-    Promise.all(
-      exerciseDay.map(async exercise => {
-        const { bodyPart, equipment, target, name } = await Exercises.findById(
-          exercise.exercise_ID
-        ).lean();
+  const productResult = productDay.map(
+    ({ _id, product_ID, date, amount, calories }) => ({
+      _id,
+      product_ID: product_ID._id,
+      date,
+      amount,
+      calories,
+      title: product_ID.title,
+      category: product_ID.category,
+      groupBloodNotAllowed: product_ID.groupBloodNotAllowed,
+    })
+  );
 
-        return { ...exercise, bodyPart, equipment, target, name };
-      })
-    ),
-  ]);
+  const exerciseResult = exerciseDay.map(
+    ({ _id, exercise_ID, date, time, calories }) => ({
+      _id,
+      exercise_ID: exercise_ID._id,
+      date,
+      time,
+      calories,
+      bodyPart: exercise_ID.bodyPart,
+      equipment: exercise_ID.equipment,
+      target: exercise_ID.target,
+      name: exercise_ID.name,
+    })
+  );
 
   const result = { productResult, exerciseResult };
 

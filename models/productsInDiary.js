@@ -8,7 +8,8 @@ const { handleMongooseError } = require('../utils');
 const productDiarySchema = new Schema(
   {
     product_ID: {
-      type: String,
+      type: Schema.Types.String,
+      ref: 'product',
       required: [true, 'ID is required'],
     },
     date: {
@@ -28,7 +29,7 @@ const productDiarySchema = new Schema(
     },
     owner: {
       type: Schema.Types.ObjectId,
-      ref: 'users',
+      ref: 'user',
       required: true,
       select: false,
     },

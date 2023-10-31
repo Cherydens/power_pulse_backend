@@ -7,7 +7,8 @@ const { handleMongooseError } = require('../utils');
 const exerciseDiarySchema = new Schema(
   {
     exercise_ID: {
-      type: String,
+      type: Schema.Types.String,
+      ref: 'exercise',
       required: [true, 'ID is required'],
     },
     date: {
@@ -27,7 +28,7 @@ const exerciseDiarySchema = new Schema(
     },
     owner: {
       type: Schema.Types.ObjectId,
-      ref: 'users',
+      ref: 'user',
       required: true,
       select: false,
     },
