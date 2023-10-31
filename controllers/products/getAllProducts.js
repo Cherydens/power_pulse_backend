@@ -1,4 +1,4 @@
-const Products = require('../../models/products');
+const { Products } = require('../../models');
 const { controllerWrapper, HttpError } = require('../../utils');
 
 const getAllProducts = controllerWrapper(async (req, res) => {

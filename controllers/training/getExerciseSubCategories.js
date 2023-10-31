@@ -1,4 +1,4 @@
-const ExerciseSubCategories = require('../../models/exerciseSubCategories');
+const { ExerciseSubCategories } = require('../../models');
 const { controllerWrapper } = require('../../utils');
 
 const getExerciseSubCategories = controllerWrapper(async (req, res) => {

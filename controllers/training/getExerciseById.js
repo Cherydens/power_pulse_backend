@@ -1,4 +1,4 @@
-const Exercises = require('../../models/exercises');
+const { Exercises } = require('../../models');
 const { controllerWrapper } = require('../../utils');
 
 const getExerciseById = controllerWrapper(async (req, res) => {

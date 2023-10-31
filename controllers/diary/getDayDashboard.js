@@ -1,9 +1,11 @@
-const ProductsDiary = require('../../models/productsInDiary');
-const ExercisesDiary = require('../../models/exercisesInDiary');
-const Exercises = require('../../models/exercises');
-const Products = require('../../models/products');
 const { format } = require('date-fns');
 const { controllerWrapper } = require('../../utils/index');
+const {
+  ProductsDiary,
+  ExercisesDiary,
+  Products,
+  Exercises,
+} = require('../../models');
 
 // Контролер отримання вправ та продуктів що містяться в щоденнику користувача за визначену дату
 const getDayDashboard = controllerWrapper(async (req, res) => {

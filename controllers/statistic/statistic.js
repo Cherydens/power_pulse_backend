@@ -1,12 +1,9 @@
-const Exercises = require('../../models/exercises');
-const User = require('../../models/user');
-const DiaryExercises = require('../../models/exercisesInDiary');
-
+const { ExercisesDiary, Exercises, User } = require('../../models');
 const { controllerWrapper } = require('../../utils');
 
 const getStatistic = controllerWrapper(async (req, res) => {
   const exerciseTotalQuantity = await Exercises.countDocuments();
-  const allDiaryExercises = await DiaryExercises.find();
+  const allDiaryExercises = await ExercisesDiary.find();
   const usersTotalQuantity = await User.countDocuments();
 
   const caloriesTotalQuantity = allDiaryExercises.reduce((acc, exercise) => {

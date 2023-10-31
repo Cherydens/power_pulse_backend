@@ -1,4 +1,4 @@
-const Exercises = require('../../models/exercisesInDiary');
+const { ExercisesDiary } = require('../../models');
 const { controllerWrapper, HttpError } = require('../../utils/index');
 
 // Контролер видалення вправи що містяться в щоденнику користувача за визначену дату
@@ -6,7 +6,7 @@ const deleteExercise = controllerWrapper(async (req, res) => {
   const { exerciseId: _id } = req.params;
   const { _id: owner } = req.user;
 
-  const exerciseResult = await Exercises.findOneAndRemove({
+  const exerciseResult = await ExercisesDiary.findOneAndRemove({
     _id,
     owner,
   });
