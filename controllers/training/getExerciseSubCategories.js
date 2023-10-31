@@ -1,33 +1,18 @@
 const { ExerciseSubCategories } = require('../../models');
 const { controllerWrapper } = require('../../utils');
+const { exerciseSubCategoriesFiltersList } = require('../../variables');
 
 const getExerciseSubCategories = controllerWrapper(async (req, res) => {
-  const { filter = '' } = req.query;
+  const { filter = null } = req.query;
+  const baseQuery = {};
 
-  switch (filter) {
-    case 'bodyPart':
-      const bodyPart = await ExerciseSubCategories.find({
-        filter: 'Body parts',
-      });
-      res.status(200).json(bodyPart);
-      break;
-    case 'target':
-      const muscles = await ExerciseSubCategories.find({
-        filter: 'Muscles',
-      });
-      res.status(200).json(muscles);
-      break;
-    case 'equipment':
-      const equipment = await ExerciseSubCategories.find({
-        filter: 'Equipment',
-      });
-      res.status(200).json(equipment);
-      break;
-
-    default:
-      const result = await ExerciseSubCategories.find();
-      res.status(200).json(result);
+  if (filter && exerciseSubCategoriesFiltersList[filter]) {
+    baseQuery.filter = exerciseSubCategoriesFiltersList[filter];
   }
+
+  const result = await ExerciseSubCategories.find(baseQuery);
+
+  res.status(200).json(result);
 });
 
 module.exports = getExerciseSubCategories;
