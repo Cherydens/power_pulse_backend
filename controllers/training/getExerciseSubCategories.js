@@ -5,10 +5,9 @@ const { exerciseSubCategoriesFiltersList } = require('../../variables');
 const getExerciseSubCategories = controllerWrapper(async (req, res) => {
   const { filter = null } = req.query;
   const baseQuery = {};
-
-  if (filter && exerciseSubCategoriesFiltersList[filter]) {
-    baseQuery.filter = exerciseSubCategoriesFiltersList[filter];
-  }
+  filter &&
+    exerciseSubCategoriesFiltersList[filter] &&
+    (baseQuery.filter = exerciseSubCategoriesFiltersList[filter]);
 
   const result = await ExerciseSubCategories.find(baseQuery);
 

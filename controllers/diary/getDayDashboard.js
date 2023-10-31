@@ -13,10 +13,7 @@ const getDayDashboard = controllerWrapper(async (req, res) => {
   const { _id: owner } = req.user;
 
   const baseQuery = { owner };
-
-  if (date) {
-    baseQuery.date = format(new Date(date), 'yyyy-MM-dd');
-  }
+  date && (baseQuery.date = format(new Date(date), 'yyyy-MM-dd'));
 
   const productDay = await ProductsDiary.find(baseQuery).lean();
   const exerciseDay = await ExercisesDiary.find(baseQuery).lean();

@@ -13,13 +13,8 @@ const getAllProducts = controllerWrapper(async (req, res) => {
 
   const baseQuery = {};
 
-  if (title) {
-    baseQuery.title = { $regex: title.trim(), $options: 'i' };
-  }
-
-  if (category) {
-    baseQuery.category = { $regex: category.trim(), $options: 'i' };
-  }
+  title && (baseQuery.title = { $regex: title.trim(), $options: 'i' });
+  category && (baseQuery.category = { $regex: category.trim(), $options: 'i' });
 
   if (recommended) {
     const { userParams } = req.user;
