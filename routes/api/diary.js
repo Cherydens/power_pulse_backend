@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { validateBody, authenticate } = require('../../middlewares');
+const { validateBody, authenticate, isValidId } = require('../../middlewares');
 
 const {
   addExerciseInDiary,
@@ -17,15 +17,15 @@ const router = express.Router();
 // Route for getting user's exercises and products by date (GET /day):
 router.route('/day').get(authenticate, getDayDashboard);
 
-// Route for deleting product in diary by id (DELETE /day/diaryProducts/:productId):
+// Route for deleting product in diary by id (DELETE /day/diaryProducts/:id):
 router
-  .route('/day/diaryProducts/:productId')
-  .delete(authenticate, deleteProduct);
+  .route('/day/diaryProducts/:id')
+  .delete(authenticate, isValidId, deleteProduct);
 
-// Route for deleting exercise in diary by id (DELETE /day/diaryExercises/:exerciseId):
+// Route for deleting exercise in diary by id (DELETE /day/diaryExercises/:id):
 router
-  .route('/day/diaryExercises/:exerciseId')
-  .delete(authenticate, deleteExercise);
+  .route('/day/diaryExercises/:id')
+  .delete(authenticate, isValidId, deleteExercise);
 
 // Route for adding product in diary (POST /day/diaryProducts):
 router

@@ -342,8 +342,11 @@
                 "amount": {
                   "type": "integer"
                 },
-                "title": {
+                "calories": {
                   "type": "integer"
+                },
+                "title": {
+                  "type": "string"
                 },
                 "category": {
                   "type": "string"
