@@ -68,7 +68,7 @@
           "birthday": {
             "type": "string",
             "description": "User's birthday",
-            "example": "2023-10-22T18:43:34.175Z"
+            "example": "2023-10-22"
           },
           "blood": {
             "type": "number",
@@ -111,6 +111,10 @@
             "type": "string",
             "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_92,w_92/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
           },
+          "avatar_140x140": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_140,w_140/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
+          },
           "avatar_150x150": {
             "type": "string",
             "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_150,w_150/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
@@ -119,9 +123,21 @@
             "type": "string",
             "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_180,w_180/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
           },
+          "avatar_250x250": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_250,w_250/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
+          },
           "avatar_300x300": {
             "type": "string",
             "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_300,w_300/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
+          },
+          "avatar_350x350": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_350,w_350/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
+          },
+          "avatar_450x450": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dhz4yf0av/image/upload/h_450,w_450/power_pulse_avatars/avatar_65356d56fa7a5576893e8407.jpg"
           }
         }
       },

@@ -34,9 +34,13 @@ const googleCallback = async (
       avatar_74x74: picture,
       avatar_90x90: picture,
       avatar_92x92: picture,
+      avatar_140x140: picture,
       avatar_150x150: picture,
       avatar_180x180: picture,
+      avatar_250x250: picture,
       avatar_300x300: picture,
+      avatar_350x350: picture,
+      avatar_450x450: picture,
     };
     const password = await bcrypt.hash(nanoid(), 10);
     const newUser = await User.create({

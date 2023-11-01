@@ -23,13 +23,25 @@ const avatarUrlsSchema = new Schema(
     avatar_92x92: {
       type: String,
     },
+    avatar_140x140: {
+      type: String,
+    },
     avatar_150x150: {
       type: String,
     },
     avatar_180x180: {
       type: String,
     },
+    avatar_250x250: {
+      type: String,
+    },
     avatar_300x300: {
+      type: String,
+    },
+    avatar_350x350: {
+      type: String,
+    },
+    avatar_450x450: {
       type: String,
     },
   },

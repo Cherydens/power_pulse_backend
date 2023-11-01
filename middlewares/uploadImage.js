@@ -18,7 +18,7 @@ const storage = new CloudinaryStorage({
       allowed_formats: ['jpg', 'png', 'svg', 'webp', 'heic', 'jpeg'],
       public_id: `avatar_${_id}_${Date.now()}`,
       transformation: [
-        { width: 300, height: 300, gravity: 'auto', crop: 'fill' },
+        { width: 450, height: 450, gravity: 'auto', crop: 'fill' },
       ],
     };
   },
