@@ -16,7 +16,7 @@ const storage = new CloudinaryStorage({
     return {
       folder: 'power_pulse_avatars',
       allowed_formats: ['jpg', 'png', 'svg', 'webp', 'heic', 'jpeg'],
-      public_id: `avatar_${_id}`,
+      public_id: `avatar_${_id}_${Date.now()}`,
       transformation: [
         { width: 300, height: 300, gravity: 'auto', crop: 'fill' },
       ],
