@@ -35,7 +35,8 @@
       "Token": {
         "type": "string",
         "description": "User's token",
-        "format": "token"
+        "format": "token",
+        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2QzYmM1MDY2NWEyZWZlNmU4YzhmMyIsImlhdCI6MTY5ODkxNjA2NCwiZXhwIjoxNjk4OTk4ODY0fQ.1sRQ0J4lbJHKmL9X2feV71DbiKTxab6J_nK2giFhURc"
       },
       "UserParams": {
         "type": "object",
@@ -152,6 +153,112 @@
         "example": "2023-10-31",
         "format": "YYYY-MM-DD"
       },
+      "_Id": {
+        "type": "string",
+        "example": "6540e173fcec8c3a63bbd7b4"
+      },
+      "Exercise_ID": {
+        "type": "string",
+        "example": "64f2458d6f67bc34bae4f813"
+      },
+      "Time": {
+        "type": "integer",
+        "example": 120
+      },
+      "Calories": {
+        "type": "integer",
+        "example": 225
+      },
+      "BodyPart": {
+        "type": "string",
+        "example": "upper arms"
+      },
+      "Equipment": {
+        "type": "string",
+        "example": "barbell"
+      },
+      "Target": {
+        "type": "string",
+        "example": "biceps"
+      },
+      "ExerciseName": {
+        "type": "string",
+        "example": "barbell drag curl"
+      },
+      "Product_ID": {
+        "type": "string",
+        "example": "5d51694802b2373622ff56c1"
+      },
+      "Amount": {
+        "type": "integer",
+        "example": 100
+      },
+      "Title": {
+        "type": "string",
+        "example": "Cedar flour"
+      },
+      "Category": {
+        "type": "string",
+        "example": "flour"
+      },
+      "GroupBloodNotAllowed": {
+        "type": "object",
+        "properties": {
+          "1": {
+            "type": "boolean"
+          },
+          "2": {
+            "type": "boolean"
+          },
+          "3": {
+            "type": "boolean"
+          },
+          "4": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Weight": {
+        "type": "number",
+        "example": 100
+      },
+      "Page": {
+        "type": "integer",
+        "example": 1
+      },
+      "Limit": {
+        "type": "integer",
+        "example": 18
+      },
+      "Total": {
+        "type": "integer",
+        "example": 2621
+      },
+      "Bmr": {
+        "type": "number",
+        "description": "User's BMR",
+        "example": 2200
+      },
+      "ProductsCategories": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "example": "fish"
+        }
+      },
+      "GifUrl": {
+        "type": "string",
+        "example": "https://ftp.goit.study/img/power-pulse/gifs/0038.gif"
+      },
+      "ExerciseFilter": {
+        "type": "string",
+        "example": "Body parts"
+      },
+      "ImgURL": {
+        "type": "string",
+        "example": "https://ftp.goit.study/img/power-pulse/filters/back_wzzphw.jpg"
+      },
+
       "RegistrationRequest": {
         "type": "object",
         "required": ["name", "email", "password"],
@@ -202,10 +309,10 @@
             "$ref": "#/components/schemas/Date"
           },
           "amount": {
-            "type": "integer"
+            "$ref": "#/components/schemas/Amount"
           },
           "calories": {
-            "type": "integer"
+            "$ref": "#/components/schemas/Calories"
           }
         }
       },
@@ -220,13 +327,14 @@
             "$ref": "#/components/schemas/Date"
           },
           "time": {
-            "type": "integer"
+            "$ref": "#/components/schemas/Time"
           },
           "calories": {
-            "type": "integer"
+            "$ref": "#/components/schemas/Calories"
           }
         }
       },
+
       "AuthResponse": {
         "type": "object",
         "properties": {
@@ -299,9 +407,7 @@
             }
           },
           "bmr": {
-            "type": "number",
-            "description": "User's BMR",
-            "example": 2200
+            "$ref": "#/components/schemas/Bmr"
           }
         }
       },
@@ -322,19 +428,24 @@
         "type": "object",
         "properties": {
           "exerciseTotalQuantity": {
-            "type": "number"
+            "type": "number",
+            "example": 100
           },
           "caloriesTotalQuantity": {
-            "type": "number"
+            "type": "number",
+            "example": 100
           },
           "usersTotalQuantity": {
-            "type": "number"
+            "type": "number",
+            "example": 100
           },
           "minutesTotalQuantity": {
-            "type": "number"
+            "type": "number",
+            "example": 100
           },
           "exerciseDoneTotalQuantity": {
-            "type": "number"
+            "type": "number",
+            "example": 100
           }
         }
       },
@@ -347,42 +458,28 @@
               "type": "object",
               "properties": {
                 "_id": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/_Id"
                 },
                 "product_ID": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Product_ID"
                 },
                 "date": {
                   "$ref": "#/components/schemas/Date"
                 },
                 "amount": {
-                  "type": "integer"
+                  "$ref": "#/components/schemas/Amount"
                 },
                 "calories": {
-                  "type": "integer"
+                  "$ref": "#/components/schemas/Calories"
                 },
                 "title": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Title"
                 },
                 "category": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Category"
                 },
                 "groupBloodNotAllowed": {
-                  "type": "object",
-                  "properties": {
-                    "1": {
-                      "type": "boolean"
-                    },
-                    "2": {
-                      "type": "boolean"
-                    },
-                    "3": {
-                      "type": "boolean"
-                    },
-                    "4": {
-                      "type": "boolean"
-                    }
-                  }
+                  "$ref": "#/components/schemas/GroupBloodNotAllowed"
                 }
               }
             }
@@ -393,31 +490,31 @@
               "type": "object",
               "properties": {
                 "_id": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/_Id"
                 },
                 "exercise_ID": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Exercise_ID"
                 },
                 "date": {
                   "$ref": "#/components/schemas/Date"
                 },
                 "time": {
-                  "type": "integer"
+                  "$ref": "#/components/schemas/Time"
                 },
                 "calories": {
-                  "type": "integer"
+                  "$ref": "#/components/schemas/Calories"
                 },
                 "bodyPart": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/BodyPart"
                 },
                 "equipment": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Equipment"
                 },
                 "target": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Target"
                 },
                 "name": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ExerciseName"
                 }
               }
             }
@@ -433,48 +530,34 @@
               "type": "object",
               "properties": {
                 "id": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/_Id"
                 },
                 "weight": {
-                  "type": "number"
+                  "$ref": "#/components/schemas/Weight"
                 },
                 "calories": {
-                  "type": "number"
+                  "$ref": "#/components/schemas/Calories"
                 },
                 "category": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Category"
                 },
                 "title": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Title"
                 },
                 "groupBloodNotAllowed": {
-                  "type": "object",
-                  "properties": {
-                    "1": {
-                      "type": "boolean"
-                    },
-                    "2": {
-                      "type": "boolean"
-                    },
-                    "3": {
-                      "type": "boolean"
-                    },
-                    "4": {
-                      "type": "boolean"
-                    }
-                  }
+                  "$ref": "#/components/schemas/GroupBloodNotAllowed"
                 }
               }
             }
           },
           "page": {
-            "type": "integer"
+            "$ref": "#/components/schemas/Page"
           },
           "limit": {
-            "type": "integer"
+            "$ref": "#/components/schemas/Limit"
           },
           "total": {
-            "type": "integer"
+            "$ref": "#/components/schemas/Total"
           }
         }
       },
@@ -484,13 +567,10 @@
           "type": "object",
           "properties": {
             "_id": {
-              "type": "string"
+              "$ref": "#/components/schemas/_Id"
             },
             "productsCategories": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/components/schemas/ProductsCategories"
             }
           }
         }
@@ -504,40 +584,40 @@
               "type": "object",
               "properties": {
                 "id": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/_Id"
                 },
                 "bodyPart": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/BodyPart"
                 },
                 "equipment": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Equipment"
                 },
                 "gifUrl": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/GifUrl"
                 },
                 "name": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ExerciseName"
                 },
                 "target": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/Target"
                 },
                 "burnedCalories": {
-                  "type": "number"
+                  "$ref": "#/components/schemas/Calories"
                 },
                 "time": {
-                  "type": "number"
+                  "$ref": "#/components/schemas/Time"
                 }
               }
             }
           },
           "page": {
-            "type": "integer"
+            "$ref": "#/components/schemas/Page"
           },
           "limit": {
-            "type": "integer"
+            "$ref": "#/components/schemas/Limit"
           },
           "total": {
-            "type": "integer"
+            "$ref": "#/components/schemas/Total"
           }
         }
       },
@@ -547,38 +627,37 @@
           "type": "object",
           "properties": {
             "_id": {
-              "type": "string"
+              "$ref": "#/components/schemas/_Id"
             },
             "filter": {
-              "type": "string"
+              "$ref": "#/components/schemas/ExerciseFilter"
             },
             "name": {
-              "type": "string"
+              "$ref": "#/components/schemas/ExerciseName"
             },
             "imgURL": {
-              "type": "string"
+              "$ref": "#/components/schemas/ImgURL"
             }
           }
         }
       },
-
       "DiaryProductsResponse": {
         "type": "object",
         "properties": {
           "_id": {
-            "type": "string"
+            "$ref": "#/components/schemas/_Id"
           },
           "product_ID": {
-            "type": "string"
+            "$ref": "#/components/schemas/Product_ID"
           },
           "date": {
             "$ref": "#/components/schemas/Date"
           },
           "amount": {
-            "type": "integer"
+            "$ref": "#/components/schemas/Amount"
           },
           "calories": {
-            "type": "integer"
+            "$ref": "#/components/schemas/Calories"
           }
         }
       },
@@ -586,19 +665,19 @@
         "type": "object",
         "properties": {
           "_id": {
-            "type": "string"
+            "$ref": "#/components/schemas/_Id"
           },
           "exercise_ID": {
-            "type": "string"
+            "$ref": "#/components/schemas/Exercise_ID"
           },
           "date": {
             "$ref": "#/components/schemas/Date"
           },
           "time": {
-            "type": "integer"
+            "$ref": "#/components/schemas/Time"
           },
           "calories": {
-            "type": "integer"
+            "$ref": "#/components/schemas/Calories"
           }
         }
       },
@@ -611,6 +690,7 @@
         }
       }
     },
+
     "securitySchemes": {
       "Bearer": {
         "type": "http",
@@ -1072,6 +1152,7 @@
         }
       }
     },
+
     "/products": {
       "get": {
         "tags": ["Products"],
