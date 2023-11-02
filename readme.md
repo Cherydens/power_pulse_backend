@@ -16,7 +16,7 @@
 ## Опис API
 
 Детально робота з ендпоінтами описана в документації
-[Power Pulse API](https://power-pulse.onrender.com/api/api-docs/#/).
+[Power Pulse API](https://power-pulse-api.onrender.com/api-docs/#/).
 Документація створена за допомогою пакета
 [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express)
 
