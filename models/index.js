@@ -5,6 +5,7 @@ const Products = require('./products');
 const ProductsCategories = require('./productsCategories');
 const ProductsDiary = require('./productsInDiary');
 const User = require('./user');
+const Review = require('./review');
 
 module.exports = {
   Exercises,
@@ -14,4 +15,5 @@ module.exports = {
   ProductsCategories,
   ProductsDiary,
   User,
+  Review,
 };

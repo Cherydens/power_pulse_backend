@@ -6,11 +6,12 @@ const swaggerDocument = require('./swagger.json');
 
 require('dotenv').config();
 
-const authRouter = require('./routes/api/users');
+const usersRouter = require('./routes/api/users');
 const trainingRouter = require('./routes/api/training');
 const productsRouter = require('./routes/api/products');
 const diaryRouter = require('./routes/api/diary');
 const statisticRouter = require('./routes/api/statistic');
+const reviewsRouter = require('./routes/api/reviews');
 
 const app = express();
 
@@ -27,11 +28,12 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/api/users', authRouter);
+app.use('/api/users', usersRouter);
 app.use('/api/training', trainingRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/diary', diaryRouter);
 app.use('/api/statistic', statisticRouter);
+app.use('/api/reviews', reviewsRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Middleware for handling 404 errors (Not Found)

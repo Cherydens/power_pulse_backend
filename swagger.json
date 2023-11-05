@@ -239,6 +239,16 @@
         "description": "User's BMR",
         "example": 2200
       },
+      "Rating": {
+        "type": "number",
+        "description": "Review's rating",
+        "example": 5
+      },
+      "Description": {
+        "type": "string",
+        "description": "Review's description",
+        "example": "Very good"
+      },
       "ProductsCategories": {
         "type": "array",
         "items": {
@@ -257,6 +267,40 @@
       "ImgURL": {
         "type": "string",
         "example": "https://ftp.goit.study/img/power-pulse/filters/back_wzzphw.jpg"
+      },
+      "Review": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "#/components/schemas/_Id"
+          },
+          "rating": {
+            "$ref": "#/components/schemas/Rating"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
+          },
+          "owner": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "$ref": "#/components/schemas/_Id"
+              },
+              "name": {
+                "$ref": "#/components/schemas/Name"
+              },
+              "avatarUrls": {
+                "$ref": "#/components/schemas/AvatarUrls"
+              }
+            }
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/CreatedAt"
+          },
+          "updatedAt": {
+            "$ref": "#/components/schemas/CreatedAt"
+          }
+        }
       },
 
       "RegistrationRequest": {
@@ -331,6 +375,29 @@
           },
           "calories": {
             "$ref": "#/components/schemas/Calories"
+          }
+        }
+      },
+      "AddReviewRequest": {
+        "type": "object",
+        "required": ["rating"],
+        "properties": {
+          "rating": {
+            "$ref": "#/components/schemas/Rating"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
+          }
+        }
+      },
+      "UpdateReviewRequest": {
+        "type": "object",
+        "properties": {
+          "rating": {
+            "$ref": "#/components/schemas/Rating"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
           }
         }
       },
@@ -681,6 +748,49 @@
           }
         }
       },
+      "ReviewsResponse": {
+        "type": "object",
+        "properties": {
+          "reviews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Review"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/Page"
+          },
+          "limit": {
+            "$ref": "#/components/schemas/Limit"
+          },
+          "total": {
+            "$ref": "#/components/schemas/Total"
+          }
+        }
+      },
+      "AddReviewsResponse": {
+        "type": "object",
+        "properties": {
+          "rating": {
+            "$ref": "#/components/schemas/Rating"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/_Id"
+          },
+          "_id": {
+            "$ref": "#/components/schemas/_Id"
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/CreatedAt"
+          },
+          "updatedAt": {
+            "$ref": "#/components/schemas/CreatedAt"
+          }
+        }
+      },
       "ErrorMessageResponse": {
         "type": "object",
         "properties": {
@@ -720,6 +830,10 @@
     {
       "name": "Statistic",
       "description": "Statistic endpoints"
+    },
+    {
+      "name": "Reviews",
+      "description": "Reviews endpoints"
     }
   ],
 
@@ -1855,6 +1969,389 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Statistic"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reviews/public": {
+      "get": {
+        "tags": ["Reviews"],
+        "summary": "Return all reviews",
+        "operationId": "getAllReviews",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Items per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20
+            }
+          },
+          {
+            "name": "rating",
+            "in": "query",
+            "description": "choose reviews by rating",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "enum": [1, 2, 3, 4, 5]
+            }
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "choose reviews by description",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reviews/public/{id}": {
+      "get": {
+        "tags": ["Reviews"],
+        "summary": "Return public review by id",
+        "operationId": "getReviewById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Choose review by id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Review"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessageResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reviews/private": {
+      "get": {
+        "tags": ["Reviews"],
+        "summary": "Return all user's reviews",
+        "operationId": "getPrivateReviews",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Items per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20
+            }
+          },
+          {
+            "name": "rating",
+            "in": "query",
+            "description": "choose reviews by rating",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "enum": [1, 2, 3, 4, 5]
+            }
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "choose reviews by description",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessageResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Reviews"],
+        "summary": "Add review",
+        "operationId": "addReview",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Review's's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddReviewRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddReviewsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessageResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reviews/private/{id}": {
+      "get": {
+        "tags": ["Reviews"],
+        "summary": "Return user's review by id",
+        "operationId": "getPrivateReviewById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Choose user's review by id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Review"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessageResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessageResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Reviews"],
+        "summary": "Update user's review by id",
+        "operationId": "updatePrivateReviewById",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Choose user's review by id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Review's's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateReviewRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Review"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessageResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessageResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Reviews"],
+        "summary": "Delete user's review by id",
+        "operationId": "removePrivateReviewById",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Choose review by id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Review"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessageResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessageResponse"
                 }
               }
             }
